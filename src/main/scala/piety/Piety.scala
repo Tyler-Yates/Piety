@@ -6,7 +6,7 @@ import java.io.File
 object Piety {
 
   def main(args: Array[String]): Unit = {
-    processImage("src"+File.separator+"main"+File.separator+"resources"+File.separator+"scala-logo.jpg")
+    processImage("src"+File.separator+"main"+File.separator+"resources"+File.separator+"hello_world.gif")
   }
   
   def processImage(path: String): Unit = {
