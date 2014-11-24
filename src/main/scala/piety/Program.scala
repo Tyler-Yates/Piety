@@ -14,13 +14,14 @@ class Program(img: BufferedImage, codelSize: Int) {
    * Processes an image representing a Piet program with the given codel size.
    */
   def processImage(img: BufferedImage, codelSize: Int): Array[Array[Codel]] = {
-    val arraySize = img.getWidth()/codelSize
-    var cod = Array.ofDim[Codel](arraySize, arraySize)
+    val arrayColumns = img.getWidth()/codelSize
+    var arrayRows = img.getHeight()/codelSize
+    var cod = Array.ofDim[Codel](arrayRows, arrayColumns)
     
     var r = 0
     var c = 0
-    for(r <- 0 to arraySize - 1) {
-      for(c <- 0 to arraySize - 1) {
+    for(r <- 0 to arrayRows - 1) {
+      for(c <- 0 to arrayColumns - 1) {
         val x = c * codelSize
         val y = r * codelSize
         cod(r)(c) = new Codel(new Color(img.getRGB(x, y)))
