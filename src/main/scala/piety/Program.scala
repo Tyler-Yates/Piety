@@ -10,6 +10,9 @@ class Program(img: BufferedImage, codelSize: Int) {
   // The program is composed of a matrix of codels which abstracts away the pixel size of the program's image.
   var codels = processImage(img, codelSize)
   
+  /**
+   * Processes an image representing a Piet program with the given codel size.
+   */
   def processImage(img: BufferedImage, codelSize: Int): Array[Array[Codel]] = {
     val arraySize = img.getWidth()/codelSize
     var cod = Array.ofDim[Codel](arraySize, arraySize)
@@ -25,5 +28,12 @@ class Program(img: BufferedImage, codelSize: Int) {
     }
     
     return cod
+  }
+  
+  /**
+   * Returns the codel at the given row and column in the codel matrix.
+   */
+  def getCodel(r: Int, c:Int): Codel = {
+    return codels(r)(c)
   }
 }
