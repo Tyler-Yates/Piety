@@ -18,4 +18,8 @@ class Codel(val col: Color) {
   override def toString(): String = {
     return Integer.toString(getColorValue())
   }
+  
+  def equals(other: Codel): Boolean = {
+    return getColorValue() == other.getColorValue()
+  }
 }
