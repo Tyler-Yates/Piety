@@ -24,7 +24,27 @@ class Program(img: BufferedImage, codelSize: Int) {
       for(c <- 0 to arrayColumns - 1) {
         val x = c * codelSize
         val y = r * codelSize
-        cod(r)(c) = new Codel(new Color(img.getRGB(x, y)))
+        
+        var aboveCodel: Codel = null
+        var leftCodel: Codel = null
+        
+        if(r>0) {
+          aboveCodel = cod(r - 1)(c)
+        }
+        if(c>0) {
+          leftCodel = cod(r)(c - 1)
+        }
+        
+        var currentCodel: Codel = new Codel(new Color(img.getRGB(x, y)))
+        
+        var parent: ColorBlock = null
+        if(aboveCodel != null && aboveCodel.equals(currentCodel)) {
+          currentCodel.setParent(aboveCodel.getParent())
+        } else if(leftCodel != null && leftCodel.equals(currentCodel)) {
+          currentCodel.setParent(leftCodel.getParent())
+        }
+        
+        cod(r)(c) = currentCodel
       }
     }
     

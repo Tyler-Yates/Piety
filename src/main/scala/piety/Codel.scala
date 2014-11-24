@@ -7,6 +7,7 @@ import java.awt.Color
  */
 class Codel(val col: Color) {
   var color: Color = col
+  var parent: ColorBlock = null
 
   /**
    * Returns the RGB color value of the current codel.
@@ -21,5 +22,17 @@ class Codel(val col: Color) {
   
   def equals(other: Codel): Boolean = {
     return getColorValue() == other.getColorValue()
+  }
+  
+  def setParent(par: ColorBlock) = {
+    parent = par
+  }
+  
+  def getParent(): ColorBlock = {
+    if(parent == null) {
+      setParent(new ColorBlock())
+    }
+    
+    return parent
   }
 }
