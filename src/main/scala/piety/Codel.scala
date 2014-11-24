@@ -14,4 +14,8 @@ class Codel(val col: Color) {
   def getColorValue(): Int = {
     return color.getRGB()
   }
+  
+  override def toString(): String = {
+    return Integer.toString(getColorValue())
+  }
 }
