@@ -2,6 +2,7 @@ package piety
 
 import javax.imageio.ImageIO
 import java.io.File
+import java.awt.Color
 
 object Piety {
 
@@ -11,7 +12,6 @@ object Piety {
   
   def processImage(path: String, codelSize: Int): Unit = {
     val image = ImageIO.read(new File(path))
-    
-    println(image)
+    val prog = new Program(image, codelSize)
   }
 }
