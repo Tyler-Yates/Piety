@@ -7,9 +7,12 @@ import Lightness._
 /**
  * Represents a single codel in a Piet program.
  */
-class Codel(val color: Color) {
+class Codel(val color: Color, val row: Int, val col: Int) {
   var hue: Hue = calculateHue(color)
   var lightness: Lightness = calculateLightness(color)
+
+  var r: Int = row
+  var c: Int = col
 
   var parent: ColorBlock = null
 
@@ -78,6 +81,14 @@ class Codel(val color: Color) {
 
   def getLightness(): Lightness = {
     return lightness
+  }
+
+  def getRow(): Int = {
+    return r
+  }
+
+  def getColumn(): Int = {
+    return c
   }
 
   override def toString(): String = {
