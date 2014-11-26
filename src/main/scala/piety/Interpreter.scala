@@ -5,14 +5,10 @@ object Interpreter {
 	final var right = 1
 	final var down 	= 2
 	final var left 	= 3
-
+	
+	val stack = new scala.collection.mutable.Stack[Int]
 	var directionPointer = right
 	var codelChooser = left
-	
-	def execute(prog: Program) = {
-		// Piet execution begins in the upper left codel
-		var startCodel = prog.getCodel(0, 0)
-	}
 	
 	def doInstruction(hueChange: Int, lightnessChange: Int) {
 	   
@@ -21,4 +17,11 @@ object Interpreter {
 	def main(args: Array[String]): Unit = {
     	  println(directionPointer)
     }
+  
+  
+  def execute(prog: Program): Unit = {
+    stack.clear()
+    
+    
+  }
 }

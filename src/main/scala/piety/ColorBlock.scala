@@ -53,7 +53,7 @@ class ColorBlock(pietColor: PietColor) {
     // DP = Right
     for (i <- topEdge to bottomEdge) {
       var currentCodel = codels(i)(rightEdge)
-      if (rightLeft == null && currentCodel.hasColor(color)) {
+      if (rightLeft == null && currentCodel.getParent() == this) {
         rightLeft = currentCodel
         // There is no easy way to break out of a loop in Scala :/
       }
@@ -61,7 +61,7 @@ class ColorBlock(pietColor: PietColor) {
 
     for (i <- bottomEdge to topEdge by -1) {
       var currentCodel = codels(i)(rightEdge)
-      if (rightRight == null && currentCodel.hasColor(color)) {
+      if (rightRight == null && currentCodel.getParent() == this) {
         rightRight = currentCodel
       }
     }
@@ -69,14 +69,14 @@ class ColorBlock(pietColor: PietColor) {
     // DP = Down
     for (i <- leftEdge to rightEdge) {
       var currentCodel = codels(bottomEdge)(i)
-      if (downRight == null && currentCodel.hasColor(color)) {
+      if (downRight == null && currentCodel.getParent() == this) {
         downRight = currentCodel
       }
     }
 
     for (i <- rightEdge to leftEdge by -1) {
       var currentCodel = codels(bottomEdge)(i)
-      if (downLeft == null && currentCodel.hasColor(color)) {
+      if (downLeft == null && currentCodel.getParent() == this) {
         downLeft = currentCodel
       }
     }
@@ -84,7 +84,7 @@ class ColorBlock(pietColor: PietColor) {
     // DP = Left
     for (i <- topEdge to bottomEdge) {
       var currentCodel = codels(i)(leftEdge)
-      if (leftRight == null && currentCodel.hasColor(color)) {
+      if (leftRight == null && currentCodel.getParent() == this) {
         leftRight = currentCodel
         // There is no easy way to break out of a loop in Scala :/
       }
@@ -92,7 +92,7 @@ class ColorBlock(pietColor: PietColor) {
 
     for (i <- bottomEdge to topEdge by -1) {
       var currentCodel = codels(i)(leftEdge)
-      if (leftLeft == null && currentCodel.hasColor(color)) {
+      if (leftLeft == null && currentCodel.getParent() == this) {
         leftLeft = currentCodel
       }
     }
@@ -100,21 +100,21 @@ class ColorBlock(pietColor: PietColor) {
     // DP = Up
     for (i <- leftEdge to rightEdge) {
       var currentCodel = codels(topEdge)(i)
-      if (upLeft == null && currentCodel.hasColor(color)) {
+      if (upLeft == null && currentCodel.getParent() == this) {
         upLeft = currentCodel
       }
     }
 
     for (i <- rightEdge to leftEdge by -1) {
       var currentCodel = codels(topEdge)(i)
-      if (upRight == null && currentCodel.hasColor(color)) {
+      if (upRight == null && currentCodel.getParent() == this) {
         upRight = currentCodel
       }
     }
   }
-  
+
   override def toString(): String = {
-    return "Color: " + color.toString() + "\nExtremes:\n" + 
+    return "Color: " + color.toString() + "\nExtremes:\n" +
       rightLeft.toString() + "\n" +
       rightRight.toString() + "\n" +
       downLeft.toString() + "\n" +
