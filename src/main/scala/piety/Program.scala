@@ -18,6 +18,7 @@ class Program(img: BufferedImage, codelSize: Int) {
     var arrayRows = img.getHeight() / codelSize
     var cod = Array.ofDim[Codel](arrayRows, arrayColumns)
 
+    // Build the codel matrix
     for (r <- 0 until arrayRows) {
       for (c <- 0 until arrayColumns) {
         val x = c * codelSize
@@ -44,11 +45,19 @@ class Program(img: BufferedImage, codelSize: Int) {
         } else if (leftCodel != null && leftCodel.equals(currentCodel)) {
           currentCodel.setParent(leftCodel.getParent())
         }
-        
+
         // Add the current codel to its parent color block to allow for easier processing on the part of the block
         currentCodel.getParent().addCodel(currentCodel)
 
         cod(r)(c) = currentCodel
+      }
+    }
+
+    // Calculate the extremes of the color blocks
+    for (r <- 0 until arrayRows) {
+      for (c <- 0 until arrayColumns) {
+        var currentCodel: Codel = cod(r)(c)
+        currentCodel.getParent().findEightExtremes(cod)
       }
     }
 

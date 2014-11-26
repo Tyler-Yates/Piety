@@ -20,11 +20,11 @@ class Codel(val color: Color, val row: Int, val col: Int) {
   def getColumn(): Int = {
     return c
   }
-  
+
   def getColor(): PietColor = {
     return pietColor
   }
-  
+
   /**
    * Returns true if the current codel has the given color.
    */
