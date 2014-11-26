@@ -38,20 +38,23 @@ class Program(img: BufferedImage, codelSize: Int) {
 
         var currentCodel: Codel = new Codel(new Color(img.getRGB(x, y)), r, c)
 
+        var parent: ColorBlock = null
         // Determine if the codel should be assigned to an existing color block
-        if (aboveCodel != null && aboveCodel.equals(currentCodel)) {
+        if (aboveCodel != null && aboveCodel.hasSameColorAs(currentCodel)) {
           // If both codels are in the same block then we need to combine the two blocks
-          if (leftCodel != null && leftCodel.equals(currentCodel)) {
+          if (leftCodel != null && leftCodel.hasSameColorAs(currentCodel)) {
             // Merge the two blocks
             aboveCodel.getParent().mergeColorBlock(leftCodel.getParent())
           }
-          currentCodel.setParent(aboveCodel.getParent())
-        } else if (leftCodel != null && leftCodel.equals(currentCodel)) {
-          currentCodel.setParent(leftCodel.getParent())
+          parent = aboveCodel.getParent()
+        } else if (leftCodel != null && leftCodel.hasSameColorAs(currentCodel)) {
+          parent = leftCodel.getParent()
         }
-
-        // Add the current codel to its parent color block to allow for easier processing on the part of the block
-        currentCodel.getParent().addCodel(currentCodel)
+        
+        if (parent == null) {
+          parent = new ColorBlock(currentCodel.getColor())
+        }
+        parent.addCodel(currentCodel)
 
         cod(r)(c) = currentCodel
       }
