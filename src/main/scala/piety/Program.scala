@@ -26,6 +26,8 @@ class Program(img: BufferedImage, codelSize: Int) {
         var aboveCodel: Codel = null
         var leftCodel: Codel = null
 
+        // Since we are reading the image left-to-right top-to-bottom, only the codels above and to the left of
+        // the current codel (if they exist) will have been initialized
         if (r > 0) {
           aboveCodel = cod(r - 1)(c)
         }
@@ -35,12 +37,16 @@ class Program(img: BufferedImage, codelSize: Int) {
 
         var currentCodel: Codel = new Codel(new Color(img.getRGB(x, y)), r, c)
 
+        // Determine if the codel should be assigned to an existing color block
         var parent: ColorBlock = null
         if (aboveCodel != null && aboveCodel.equals(currentCodel)) {
           currentCodel.setParent(aboveCodel.getParent())
         } else if (leftCodel != null && leftCodel.equals(currentCodel)) {
           currentCodel.setParent(leftCodel.getParent())
         }
+        
+        // Add the current codel to its parent color block to allow for easier processing on the part of the block
+        currentCodel.getParent().addCodel(currentCodel)
 
         cod(r)(c) = currentCodel
       }
