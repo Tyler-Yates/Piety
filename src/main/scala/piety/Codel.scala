@@ -24,6 +24,13 @@ class Codel(val color: Color, val row: Int, val col: Int) {
   def getColor(): PietColor = {
     return pietColor
   }
+  
+  /**
+   * Returns true if the current codel has the given color.
+   */
+  def hasColor(color: PietColor): Boolean = {
+    return pietColor.equals(color)
+  }
 
   override def toString(): String = {
     return "Row: " + r + " Column: " + c + " Color: " + pietColor.toString()
