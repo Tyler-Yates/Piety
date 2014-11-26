@@ -132,6 +132,52 @@ object Interpreter {
   def execute(prog: Program): Unit = {
     stack.clear()
     
+    var row = 0
+    var col = 0
+    var attemptCount = 0
+    var rotate = false
     
+    while(attemptCount < 8) {
+      var currentCodel = prog.getCodel(row, col)
+      var edgeCodel = currentCodel.getEdgeCodel(directionPointer, codelChooser)
+      var nextRow = edgeCodel.getRow()
+      var nextCol = edgeCodel.getColumn()
+      
+      var white = -1
+      
+      do{
+        if(directionPointer % 2 == 0) {
+          nextCol += directionPointer - 1
+        }
+        else {
+          nextRow += 2 - directionPointer
+        }
+        white += 1
+      } while (prog.onBoard(nextRow, nextCol) && prog.getCodel(nextRow, nextCol).getColor().getHue() == Hue.White);
+      if(!prog.onBoard(nextRow, nextCol) || prog.getCodel(nextRow, nextCol).getColor().getHue() == Hue.Black) {
+        if(rotate) {
+          directionPointer += 1
+          directionPointer %= 4
+          rotate = false
+        }
+        else {
+          codelChooser *= -1
+          rotate = true
+        }
+        attemptCount += 1
+      }
+      else {
+        if(white == 0) {
+          var nextCodel = prog.getCodel(nextRow, nextCol)
+          var hueChange = nextCodel.getColor().getHue() - currentCodel.getColor().getHue()
+          var lightnessChange = nextCodel.getColor().getLightness() - currentCodel.getColor().getLightness()
+          doInstruction(hueChange, lightnessChange, nextCodel.getParent().getValue())
+        }
+        row = nextRow
+        col = nextCol
+        attemptCount = 0
+        rotate = false
+      }
+    }
   }
 }

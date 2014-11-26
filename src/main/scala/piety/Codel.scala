@@ -55,4 +55,11 @@ class Codel(val color: Color, val row: Int, val col: Int) {
 
     return parent
   }
+  
+  /**
+   * Returns the Codel at the edge of this Codel's ColorBlock
+   */
+  def getEdgeCodel(dp: Int, cc: Int): Codel = {
+    return parent.getCodel(dp, cc)
+  }
 }

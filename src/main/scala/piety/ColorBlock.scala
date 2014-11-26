@@ -7,7 +7,7 @@ class ColorBlock(pietColor: PietColor) {
   var children: ListBuffer[Codel] = new ListBuffer[Codel]()
 
   var color: PietColor = pietColor
-
+  
   var topEdge: Int = Integer.MAX_VALUE
   var bottomEdge: Int = Integer.MIN_VALUE
   var leftEdge: Int = Integer.MAX_VALUE
@@ -165,6 +165,45 @@ class ColorBlock(pietColor: PietColor) {
     return this.hashCode() == other.hashCode()
   }
 
+  def getCodel(dp: Int, cc: Int): Codel = {
+    if(dp == Direction.DP.UP) {
+      if(cc == Direction.CC.LEFT) {
+        return upLeft
+      }
+      else {
+        return upRight
+      }
+    }
+    else if(dp == Direction.DP.RIGHT) {
+      if(cc == Direction.CC.LEFT) {
+        return rightLeft
+      }
+      else {
+        return rightRight
+      }
+    }
+    else if(dp == Direction.DP.DOWN) {
+      if(cc == Direction.CC.LEFT) {
+        return downLeft
+      }
+      else {
+        return downRight
+      }
+    }
+    else {
+      if(cc == Direction.CC.LEFT) {
+        return leftLeft
+      }
+      else {
+        return leftRight
+      }
+    }
+  }
+  
+  def getValue(): Int = {
+    return children.size
+  }
+  
   override def toString(): String = {
     return "Color: " + color.toString() + "\nExtremes:\n" +
       rightLeft.toString() + "\n" +
