@@ -39,7 +39,7 @@ class Codel(val color: Color, val row: Int, val col: Int) {
 
   def getParent(): ColorBlock = {
     if (parent == null) {
-      setParent(new ColorBlock())
+      setParent(new ColorBlock(pietColor))
     }
 
     return parent

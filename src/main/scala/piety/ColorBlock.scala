@@ -1,12 +1,17 @@
 package piety
 
-class ColorBlock {
+class ColorBlock(pietColor: PietColor) {
+  
+  var color: PietColor = pietColor
+  
+  var topEdge: Int = Integer.MAX_VALUE
+  var bottomEdge: Int = Integer.MIN_VALUE
+  var leftEdge: Int = Integer.MAX_VALUE
+  var rightEdge: Int = Integer.MIN_VALUE
 
-  // right-most edge - upper
+  // Read these in two parts: DP CC
   var rightLeft: Codel = null
-  // right-most edge - lower
   var rightRight: Codel = null
-
   var downLeft: Codel = null
   var downRight: Codel = null
   var leftLeft: Codel = null
@@ -15,30 +20,21 @@ class ColorBlock {
   var upRight: Codel = null
 
   def addCodel(codel: Codel) = {
-    if (rightLeft == null) {
-      rightLeft = codel
-      rightRight = codel
-      downLeft = codel
-      downRight = codel
-      leftLeft = codel
-      leftRight = codel
-      upLeft = codel
-      upRight = codel
-    } else {
-      // right-most edge
-      if (codel.getColumn() > rightLeft.getColumn()) {
-        rightLeft = codel
-        rightRight = codel
-      } else if (codel.getColumn() == rightLeft.getColumn()) {
-        if (codel.getRow() < rightLeft.getRow()) {
-          rightLeft = codel
-        }
-        if (codel.getRow() > rightRight.getRow()) {
-          rightRight = codel
-        }
-      }
-
-      //TODO add the other directions
+    val r = codel.getRow()
+    val c = codel.getColumn()
+    
+    if(r < topEdge) {
+      topEdge = r
+    }
+    if(r > bottomEdge) {
+      bottomEdge = r
+    }
+    
+    if(c < leftEdge) {
+      leftEdge = c
+    }
+    if(c > rightEdge) {
+      rightEdge = c
     }
   }
 }
