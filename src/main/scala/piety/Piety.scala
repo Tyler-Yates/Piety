@@ -14,6 +14,6 @@ object Piety {
     val image = ImageIO.read(new File(path))
     val prog = new Program(image, codelSize)
     
-    println(prog.getCodel(0, 0).getParent())
+    Interpreter.execute(prog)
   }
 }
