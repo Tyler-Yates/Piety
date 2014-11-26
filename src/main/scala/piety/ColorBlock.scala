@@ -22,6 +22,10 @@ class ColorBlock(pietColor: PietColor) {
   var leftRight: Codel = null
   var upLeft: Codel = null
   var upRight: Codel = null
+  
+  def getColor(): PietColor = {
+    return color
+  }
 
   def addCodel(codel: Codel) = {
     children += codel
@@ -49,6 +53,16 @@ class ColorBlock(pietColor: PietColor) {
    * Merges the given color block into the current color block.
    */
   def mergeColorBlock(otherBlock: ColorBlock) {
+    // Only blocks with the same color can be merged
+    if(!color.equals(otherBlock.getColor())) {
+      throw new IllegalArgumentException("Color blocks must have same color to merge")
+    }
+    
+    // Don't merge the same block
+    if(otherBlock eq this) {
+      return
+    }
+    
     // Update the parent pointer of the other block's codels
     for(child <- otherBlock.children) {
       child.setParent(this)
