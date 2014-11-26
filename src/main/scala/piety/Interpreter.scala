@@ -169,8 +169,8 @@ object Interpreter {
       else {
         if(white == 0) {
           var nextCodel = prog.getCodel(nextRow, nextCol)
-          var hueChange = nextCodel.getColor().getHue() - currentCodel.getColor().getHue()
-          var lightnessChange = nextCodel.getColor().getLightness() - currentCodel.getColor().getLightness()
+          var hueChange = nextCodel.getColor().getHue().id - currentCodel.getColor().getHue().id
+          var lightnessChange = nextCodel.getColor().getLightness().id - currentCodel.getColor().getLightness().id
           doInstruction(hueChange, lightnessChange, nextCodel.getParent().getValue())
         }
         row = nextRow
