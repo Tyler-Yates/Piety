@@ -25,6 +25,7 @@ class ColorBlock(pietColor: PietColor) {
 
   def addCodel(codel: Codel) = {
     children += codel
+    codel.setParent(this)
 
     val r = codel.getRow()
     val c = codel.getColumn()
@@ -144,6 +145,10 @@ class ColorBlock(pietColor: PietColor) {
         upRight = currentCodel
       }
     }
+  }
+  
+  override def equals(other: Any): Boolean = {
+    return this.hashCode() == other.hashCode()
   }
 
   override def toString(): String = {
