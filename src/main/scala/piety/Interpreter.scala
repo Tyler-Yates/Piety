@@ -15,7 +15,7 @@ object Interpreter {
 	}
 	
 	def doInstruction(hueChange: Int, lightnessChange: Int) {
-	  
+	   
 	}
 	
 	def main(args: Array[String]): Unit = {
