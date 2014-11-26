@@ -59,7 +59,7 @@ class ColorBlock(pietColor: PietColor) {
       }
     }
 
-    for (i <- bottomEdge to topEdge) {
+    for (i <- bottomEdge to topEdge by -1) {
       var currentCodel = codels(i)(rightEdge)
       if (rightRight == null && currentCodel.hasColor(color)) {
         rightRight = currentCodel
@@ -74,7 +74,7 @@ class ColorBlock(pietColor: PietColor) {
       }
     }
 
-    for (i <- rightEdge to leftEdge) {
+    for (i <- rightEdge to leftEdge by -1) {
       var currentCodel = codels(bottomEdge)(i)
       if (downLeft == null && currentCodel.hasColor(color)) {
         downLeft = currentCodel
@@ -90,7 +90,7 @@ class ColorBlock(pietColor: PietColor) {
       }
     }
 
-    for (i <- bottomEdge to topEdge) {
+    for (i <- bottomEdge to topEdge by -1) {
       var currentCodel = codels(i)(leftEdge)
       if (leftLeft == null && currentCodel.hasColor(color)) {
         leftLeft = currentCodel
@@ -105,11 +105,23 @@ class ColorBlock(pietColor: PietColor) {
       }
     }
 
-    for (i <- rightEdge to leftEdge) {
+    for (i <- rightEdge to leftEdge by -1) {
       var currentCodel = codels(topEdge)(i)
       if (upRight == null && currentCodel.hasColor(color)) {
         upRight = currentCodel
       }
     }
+  }
+  
+  override def toString(): String = {
+    return "Color: " + color.toString() + "\nExtremes:\n" + 
+      rightLeft.toString() + "\n" +
+      rightRight.toString() + "\n" +
+      downLeft.toString() + "\n" +
+      downRight.toString() + "\n" +
+      leftLeft.toString() + "\n" +
+      leftRight.toString() + "\n" +
+      upLeft.toString() + "\n" +
+      upRight.toString()
   }
 }
