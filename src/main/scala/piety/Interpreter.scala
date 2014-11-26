@@ -3,14 +3,10 @@ package piety
 import scala.math
 
 object Interpreter {
-	final var up 	= 0
-	final var right = 1
-	final var down 	= 2
-	final var left 	= 3
 	
 	val stack = new scala.collection.mutable.Stack[Int]
-	var directionPointer = right
-	var codelChooser = left
+	var directionPointer: Int = Direction.Right.id
+	var codelChooser: Int = Direction.Left.id
 	
 	def doInstruction(hueChange: Int, lightnessChange: Int, cBValue: Int): Unit = {
 		hueChange match {
@@ -124,10 +120,6 @@ object Interpreter {
 	    	stack.push(tempVal)
 	    }
 	}
-	
-	def main(args: Array[String]): Unit = {
-    	  println(-14%5)
-    }  
   
   def execute(prog: Program): Unit = {
     stack.clear()
@@ -138,8 +130,8 @@ object Interpreter {
     var rotate = false
     
     while(attemptCount < 8) {
-      var currentCodel = prog.getCodel(row, col)
-      var edgeCodel = currentCodel.getEdgeCodel(directionPointer, codelChooser)
+      val currentCodel = prog.getCodel(row, col)
+      val edgeCodel = currentCodel.getEdgeCodel(directionPointer, codelChooser)
       var nextRow = edgeCodel.getRow()
       var nextCol = edgeCodel.getColumn()
       
@@ -147,10 +139,10 @@ object Interpreter {
       
       do{
         if(directionPointer % 2 == 0) {
-          nextCol += directionPointer - 1
+          nextRow += directionPointer - 1
         }
         else {
-          nextRow += 2 - directionPointer
+          nextCol += 2 - directionPointer
         }
         white += 1
       } while (prog.onBoard(nextRow, nextCol) && prog.getCodel(nextRow, nextCol).getColor().getHue() == Hue.White);
@@ -168,9 +160,15 @@ object Interpreter {
       }
       else {
         if(white == 0) {
-          var nextCodel = prog.getCodel(nextRow, nextCol)
-          var hueChange = nextCodel.getColor().getHue() - currentCodel.getColor().getHue()
-          var lightnessChange = nextCodel.getColor().getLightness() - currentCodel.getColor().getLightness()
+          var nextCodel: Codel = prog.getCodel(nextRow, nextCol)
+          var hueChange: Int = nextCodel.getColor().getHue().id - currentCodel.getColor().getHue().id
+          if(hueChange < 0) {
+            hueChange += 6
+          }
+          var lightnessChange: Int = nextCodel.getColor().getLightness().id - currentCodel.getColor().getLightness().id
+          if(lightnessChange < 0) {
+            lightnessChange += 3
+          }
           doInstruction(hueChange, lightnessChange, nextCodel.getParent().getValue())
         }
         row = nextRow

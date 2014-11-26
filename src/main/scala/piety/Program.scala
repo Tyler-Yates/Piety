@@ -15,7 +15,7 @@ class Program(img: BufferedImage, codelSize: Int) {
    */
   def processImage(img: BufferedImage, codelSize: Int): Array[Array[Codel]] = {
     val arrayColumns = img.getWidth() / codelSize
-    var arrayRows = img.getHeight() / codelSize
+    val arrayRows = img.getHeight() / codelSize
     var cod = Array.ofDim[Codel](arrayRows, arrayColumns)
 
     // Build the codel matrix

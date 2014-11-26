@@ -166,24 +166,24 @@ class ColorBlock(pietColor: PietColor) {
   }
 
   def getCodel(dp: Int, cc: Int): Codel = {
-    if(dp == Direction.DP.UP) {
-      if(cc == Direction.CC.LEFT) {
+    if(dp == Direction.Up.id) {
+      if(cc == (2 - Direction.Left.id)) {
         return upLeft
       }
       else {
         return upRight
       }
     }
-    else if(dp == Direction.DP.RIGHT) {
-      if(cc == Direction.CC.LEFT) {
+    else if(dp == Direction.Right.id) {
+      if(cc == (2 - Direction.Left.id)) {
         return rightLeft
       }
       else {
         return rightRight
       }
     }
-    else if(dp == Direction.DP.DOWN) {
-      if(cc == Direction.CC.LEFT) {
+    else if(dp == Direction.Down.id) {
+      if(cc == (2 - Direction.Left.id)) {
         return downLeft
       }
       else {
@@ -191,7 +191,7 @@ class ColorBlock(pietColor: PietColor) {
       }
     }
     else {
-      if(cc == Direction.CC.LEFT) {
+      if(cc == (2 - Direction.Left.id)) {
         return leftLeft
       }
       else {
