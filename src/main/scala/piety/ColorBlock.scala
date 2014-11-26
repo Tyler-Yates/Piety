@@ -1,6 +1,10 @@
 package piety
 
+import scala.collection.mutable.ListBuffer
+
 class ColorBlock(pietColor: PietColor) {
+
+  var children: ListBuffer[Codel] = new ListBuffer[Codel]()
 
   var color: PietColor = pietColor
 
@@ -20,6 +24,8 @@ class ColorBlock(pietColor: PietColor) {
   var upRight: Codel = null
 
   def addCodel(codel: Codel) = {
+    children += codel
+
     val r = codel.getRow()
     val c = codel.getColumn()
 
@@ -35,6 +41,33 @@ class ColorBlock(pietColor: PietColor) {
     }
     if (c > rightEdge) {
       rightEdge = c
+    }
+  }
+
+  /**
+   * Merges the given color block into the current color block.
+   */
+  def mergeColorBlock(otherBlock: ColorBlock) {
+    // Update the parent pointer of the other block's codels
+    for(child <- otherBlock.children) {
+      child.setParent(this)
+    }
+    
+    // Add the other block's codels to the current block
+    children ++= otherBlock.children
+    
+    // Update the edges of the current block
+    if(otherBlock.topEdge < topEdge) {
+      topEdge = otherBlock.topEdge
+    }
+    if (otherBlock.bottomEdge > bottomEdge) {
+      bottomEdge = otherBlock.bottomEdge
+    }
+    if (otherBlock.leftEdge < leftEdge) {
+      leftEdge = otherBlock.leftEdge
+    }
+    if (otherBlock.rightEdge > rightEdge) {
+      rightEdge = otherBlock.rightEdge
     }
   }
 
