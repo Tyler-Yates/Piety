@@ -12,24 +12,33 @@ import java.awt.Color
 class IntegrationTest extends AssertionsForJUnit {
 
   @Test def testProg1() = {
-    val prog1: Program = new Program(ImageIO.read(new File(
-      "src" + File.separator + "test" + File.separator + "resources" + File.separator + "hello_world.gif")), 11)
-    
-    val stream = new ByteArrayOutputStream()
-    Console.withOut(stream) {
-      Interpreter.execute(prog1)
-      assertEquals("Hello, world!", stream.toString().trim())
-    }
+    testProg("hello_world.gif", 11, "Hello, world!")
   }
   
   @Test def testProg2() = {
-    var prog2: Program = new Program(ImageIO.read(new File(
-      "src" + File.separator + "test" + File.separator + "resources" + File.separator + "hello_world2.gif")), 1)
+    testProg("hello_world2.gif", 1, "Hello, world!")
+  }
+  
+  @Test def testProg3() = {
+    testProg("hello_world3.gif", 1, "Hello, world!")
+  }
+  
+  @Test def testProg4() = {
+    testProg("alphabet.gif", 1, "abcdefghijklmnopqrstuvwxyz")
+  }
+  
+  @Test def testProg5() = {
+    testProg("piet.gif", 1, "Piet")
+  }
+  
+  def testProg(fileName: String, codelSize: Int, expectedOutput: String) = {
+    var prog: Program = new Program(ImageIO.read(new File(
+      "src" + File.separator + "test" + File.separator + "resources" + File.separator + fileName)), codelSize)
     
     val stream = new ByteArrayOutputStream()
     Console.withOut(stream) {
-      Interpreter.execute(prog2)
-      assertEquals("Hello, world!", stream.toString().trim())
+      Interpreter.execute(prog)
+      assertEquals(expectedOutput, stream.toString().trim())
     }
   }
 }
