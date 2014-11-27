@@ -97,6 +97,8 @@ object Interpreter {
   
   def execute(prog: Program): Unit = {
     stack.clear()
+    directionPointer = Direction.Right.id
+    codelChooser = 2 - Direction.Left.id
     
     var row = 0
     var col = 0
