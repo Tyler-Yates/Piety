@@ -39,9 +39,9 @@ class PietStack {
       for (i <- 0 until (-1 * numberOfRolls)) {
         val first = stack.dropRight(depth)
         val top = stack.takeRight(depth)
-        val mid = top.head
-        val last = top.drop(1)
-        stack = (first :+ mid) ++ last
+        val mid = top.drop(1)
+        val last = top.head
+        stack = first ++ (mid :+ last)
       }
     }
   }
