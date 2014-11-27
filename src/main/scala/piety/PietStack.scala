@@ -1,20 +1,20 @@
 package piety
 
-import java.util.LinkedList
-
 class PietStack {
-  val stack = new LinkedList[Int]()
+  var stack = new scala.collection.mutable.MutableList[Int]()
 
   def push(value: Int) = {
-    stack.add(value)
+    stack += value
   }
   
   def pop(): Int = {
-    return stack.removeFirst()
+    val ret = stack.last
+    stack = stack.init
+    return ret
   }
   
   def size(): Int = {
-    return stack.size()
+    return stack.length
   }
   
   def clear() = {
@@ -26,6 +26,21 @@ class PietStack {
       throw new IllegalArgumentException("Negative depth not allowed")
     }
     
-    // TODO implement rolling
+    if(numberOfRolls > 0) {
+      for (i <- 0 until numberOfRolls) {
+        val first = stack.dropRight(depth)
+        val top = stack.takeRight(depth)
+        val mid = top.last
+        val last = top.dropRight(1)
+        stack = (first :+ mid) ++ last
+      }
+    }
+    else if(numberOfRolls < 0) {
+      
+    }
+  }
+  
+  override def toString(): String = {
+    return stack.toString()
   }
 }

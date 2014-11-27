@@ -4,9 +4,9 @@ import scala.math
 
 object Interpreter {
 	
-	val stack = new scala.collection.mutable.Stack[Int]
+	val stack = new PietStack
 	var directionPointer: Int = Direction.Right.id
-	var codelChooser: Int = Direction.Left.id
+	var codelChooser: Int = 2 - Direction.Left.id
 	
 	def doInstruction(hueChange: Int, lightnessChange: Int, cBValue: Int): Unit = {
 		hueChange match {
@@ -41,8 +41,9 @@ object Interpreter {
 	}
 	def hueChange2(lightnessChange: Int, cBValue: Int): Unit = {
 	  	lightnessChange match {
-	  	    // divide
-	  		case 0 => stack.push(stack.pop() / stack.pop())
+	  	  // divide
+	  		case 0 => {val temp = stack.pop()
+          stack.push(stack.pop() / temp)}
 	  		// mod
 		  	case 1 => stack.push(stack.pop() % stack.pop())
 		  	// negate
@@ -69,15 +70,9 @@ object Interpreter {
 	  					stack.push(i)
 	  					stack.push(i)
 	  		// roll
-		  	case 1 =>	var num = stack.pop()
+		  	case 1 =>	{var num = stack.pop()
 		  				var depth = stack.pop()
-		  				if (depth > 0) {
-		  					if (num < 0)
-		  						depth = depth * -1
-		  					for(i <- 0 until num)
-		  						roll(depth)
-		  				}
-		  				
+		  				stack.roll(num, depth)}
 		  	// in (number)
 		  	case 2 => stack.push(readInt())
 		}
@@ -98,30 +93,6 @@ object Interpreter {
 		if (directionPointer < 0) {
 			directionPointer += 4
 		}
-	}
-	def roll(depth: Int): Unit = {
-	    var tempStack = new scala.collection.mutable.Stack[Int]
-	    var tempVal = 0
-	    if (depth > 0) {
-	    	tempVal = stack.pop()
-	    	for (i <- 0 until depth) {
-	    		tempStack.push(stack.pop())
-	    	}
-	    	stack.push(tempVal)
-	    	for(i <- 0 until depth) {
-	    		stack.push(tempStack.pop())
-	    	}
-	    }
-	    if(depth < 0) {
-	    	for (i <- 0 until depth) {
-	    		tempStack.push(stack.pop())
-	    	}
-	    	tempVal = stack.pop()
-	    	for(i <- 0 until depth) {
-	    		stack.push(tempStack.pop())
-	    	}
-	    	stack.push(tempVal)
-	    }
 	}
   
   def execute(prog: Program): Unit = {
