@@ -66,9 +66,9 @@ object Interpreter {
 	def hueChange4(lightnessChange: Int, cBValue: Int): Unit = {
 	  	lightnessChange match {
 	  	    // duplicate
-	  		case 0 => 	val i = stack.pop()
+	  		case 0 => {val i = stack.pop()
 	  					stack.push(i)
-	  					stack.push(i)
+	  					stack.push(i)}
 	  		// roll
 		  	case 1 =>	{var num = stack.pop()
 		  				var depth = stack.pop()
