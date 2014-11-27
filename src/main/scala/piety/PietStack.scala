@@ -36,7 +36,13 @@ class PietStack {
       }
     }
     else if(numberOfRolls < 0) {
-      
+      for (i <- 0 until (-1 * numberOfRolls)) {
+        val first = stack.dropRight(depth)
+        val top = stack.takeRight(depth)
+        val mid = top.head
+        val last = top.drop(1)
+        stack = (first :+ mid) ++ last
+      }
     }
   }
   
