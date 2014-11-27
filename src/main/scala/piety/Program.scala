@@ -79,7 +79,7 @@ class Program(img: BufferedImage, codelSize: Int) {
   }
   
   def onBoard(r: Int, c: Int): Boolean = {
-    if(r > 0 && c > 0 && r < codels.size && c < codels(0).size) {
+    if(r > -1 && c > -1 && r < codels.size && c < codels(0).size) {
       return true
     }
     return false

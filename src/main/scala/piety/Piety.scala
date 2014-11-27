@@ -7,7 +7,7 @@ import java.awt.Color
 object Piety {
 
   def main(args: Array[String]): Unit = {
-    processImage("src"+File.separator+"main"+File.separator+"resources"+File.separator+"hello_world2.gif", 1)
+    processImage("src"+File.separator+"main"+File.separator+"resources"+File.separator+"hello_world.gif", 11)
   }
   
   def processImage(path: String, codelSize: Int): Unit = {

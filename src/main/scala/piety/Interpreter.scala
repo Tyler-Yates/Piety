@@ -56,7 +56,10 @@ object Interpreter {
 	  		// pointer
 		  	case 1 => rotateDP(stack.pop())
 		  	// switch
-		  	case 2 => codelChooser = (codelChooser + math.abs(stack.pop()) % 2 * 2 ) % 4
+		  	case 2 => {if(stack.size > 0) {
+          codelChooser = (codelChooser + math.abs(stack.pop()) % 2 * 2 ) % 4
+        }
+      }
 		}
 	}
 	def hueChange4(lightnessChange: Int, cBValue: Int): Unit = {
@@ -169,7 +172,7 @@ object Interpreter {
           if(lightnessChange < 0) {
             lightnessChange += 3
           }
-          doInstruction(hueChange, lightnessChange, nextCodel.getParent().getValue())
+          doInstruction(hueChange, lightnessChange, currentCodel.getParent().getValue())
         }
         row = nextRow
         col = nextCol
