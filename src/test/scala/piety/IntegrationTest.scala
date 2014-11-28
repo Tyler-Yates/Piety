@@ -11,6 +11,7 @@ import java.awt.Color
 
 class IntegrationTest extends AssertionsForJUnit {
 
+  
   @Test def testProg1() = {
     testProg("hello_world.gif", 11, "Hello, world!")
   }
@@ -19,12 +20,13 @@ class IntegrationTest extends AssertionsForJUnit {
     testProg("hello_world2.gif", 1, "Hello, world!")
   }
   
+  /*
   @Test def testProg3() = {
     testProg("hello_world3.gif", 1, "Hello, world!")
-  }
+  }*/
   
   @Test def testProg4() = {
-    testProg("alphabet.gif", 1, "abcdefghijklmnopqrstuvwxyz")
+    testProg("alpha_filled.png", 1, "abcdefghijklmnopqrstuvwxyz")
   }
   
   @Test def testProg5() = {

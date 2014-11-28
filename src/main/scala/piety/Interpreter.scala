@@ -26,53 +26,58 @@ object Interpreter {
 		  	// push
 		  	case 1 => stack.push(cBValue)
 		  	// pop
-		  	case 2 => stack.pop()
+		  	case 2 => {if(stack.size() > 0) {stack.pop()}}
 		}
 	}
 	def hueChange1(lightnessChange: Int, cBValue: Int): Unit = {
 	  	lightnessChange match {
 	  		// add
-	  		case 0 => stack.push(stack.pop() + stack.pop())
+	  		case 0 => {if(stack.size() > 1) {stack.push(stack.pop() + stack.pop())}}
 	  		// subtract
-		  	case 1 => stack.push(stack.pop() - stack.pop())
+		  	case 1 => {if(stack.size() > 1) {
+          val temp = stack.pop()
+          stack.push(stack.pop() - temp)}}
 		  	// multiply
-		  	case 2 => stack.push(stack.pop() * stack.pop())
+		  	case 2 => {if(stack.size() > 1) {stack.push(stack.pop() * stack.pop())}}
 		}
 	}
 	def hueChange2(lightnessChange: Int, cBValue: Int): Unit = {
 	  	lightnessChange match {
 	  	  // divide
-	  		case 0 => {val temp = stack.pop()
-          stack.push(stack.pop() / temp)}
+	  		case 0 => {if(stack.size() > 1) {
+          val temp = stack.pop()
+          stack.push(stack.pop() / temp)}}
 	  		// mod
-		  	case 1 => stack.push(stack.pop() % stack.pop())
+		  	case 1 => {if(stack.size() > 1) {
+          val temp = stack.pop()
+          stack.push(stack.pop() % temp)}}
 		  	// negate
-		  	case 2 => stack.push(if(stack.pop() != 0) 0 else 1)
+		  	case 2 => {if(stack.size() > 0) {stack.push(if(stack.pop() != 0) 0 else 1)}}
 		}
 	}
 	def hueChange3(lightnessChange: Int, cBValue: Int): Unit = {
 	  	lightnessChange match {
-	  	    // greater
-	  		case 0 => stack.push(if(stack.pop() <= stack.pop()) 1 else 0)
+	  	  // greater
+	  		case 0 => {if(stack.size() > 1) {stack.push(if(stack.pop() < stack.pop()) 1 else 0)}}
 	  		// pointer
-		  	case 1 => rotateDP(stack.pop())
+		  	case 1 => {if(stack.size() > 0) {rotateDP(stack.pop())}}
 		  	// switch
 		  	case 2 => {if(stack.size > 0) {
-          codelChooser = (codelChooser + math.abs(stack.pop()) % 2 * 2 ) % 4
-        }
+          codelChooser = (codelChooser + (math.abs(stack.pop()) % 2) * 2 ) % 4}}
       }
-		}
 	}
 	def hueChange4(lightnessChange: Int, cBValue: Int): Unit = {
 	  	lightnessChange match {
 	  	    // duplicate
-	  		case 0 => {val i = stack.pop()
+	  		case 0 => {if(stack.size() > 0) {
+              val i = stack.pop()
 	  					stack.push(i)
-	  					stack.push(i)}
+	  					stack.push(i)}}
 	  		// roll
-		  	case 1 =>	{var num = stack.pop()
+		  	case 1 =>	{if(stack.size() > 1) {
+              var num = stack.pop()
 		  				var depth = stack.pop()
-		  				stack.roll(num, depth)}
+		  				stack.roll(num, depth)}}
 		  	// in (number)
 		  	case 2 => stack.push(readInt())
 		}
@@ -82,9 +87,9 @@ object Interpreter {
 	  		// in (char)
 	  		case 0 => stack.push(readChar().asInstanceOf[Int])
 	  		// out (number)
-		  	case 1 => print(stack.pop())
+		  	case 1 => {if(stack.size() > 0) {print(stack.pop())}}
 		  	// out (char)
-		  	case 2 => print(stack.pop().asInstanceOf[Char])
+		  	case 2 => {if(stack.size() > 0) {print(stack.pop().asInstanceOf[Char])}}
 		}
 	}
 	
