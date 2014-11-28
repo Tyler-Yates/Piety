@@ -110,6 +110,7 @@ object Interpreter {
     var attemptCount = 0
     var rotate = false
     
+    // execution terminates when the program is unable to leave a block after 8 attempts
     while(attemptCount < 8) {
       val currentCodel = prog.getCodel(row, col)
       val edgeCodel = currentCodel.getEdgeCodel(directionPointer, codelChooser)
@@ -118,12 +119,14 @@ object Interpreter {
       
       var white = false
       
+      // look to see where the interpreter is headed
       if(directionPointer % 2 == 0) {
         nextRow += directionPointer - 1
       }
       else {
         nextCol += 2 - directionPointer
       }
+      // if the interpreter hits black space or the edge of the board, rotate instead of moving
       if(!prog.onBoard(nextRow, nextCol)
          || prog.getCodel(nextRow, nextCol).getColor().getHue() == Hue.Black) {
         if(rotate) {
@@ -137,12 +140,12 @@ object Interpreter {
         }
         attemptCount += 1
       }
+      // if the interpreter enters white space or a new color block
       else {
-        while(!prog.onBoard(nextRow, nextCol)
-            || prog.getCodel(nextRow, nextCol).getColor().getHue() == Hue.Black
-            || prog.getCodel(nextRow, nextCol).getColor().getHue() == Hue.White
-            || prog.getCodel(nextRow, nextCol).getParent().equals(currentCodel.getParent())) {
+        // as long as the interpreter is in white space, move around that white block
+        while(prog.getCodel(nextRow, nextCol).getColor().getHue() == Hue.White) {
           white = true
+          // we want to look to see where we're going before we move there
           var possRow = nextRow
           var possCol = nextCol
           if(directionPointer % 2 == 0) {
@@ -151,6 +154,7 @@ object Interpreter {
           else {
             possCol += 2 - directionPointer
           }
+          // if the interpreter hits the edge, black space, or its original color block, rotate
           if(!prog.onBoard(possRow, possCol)
               || prog.getCodel(possRow, possCol).getColor().getHue() == Hue.Black
               || prog.getCodel(possRow, possCol).getParent().equals(currentCodel.getParent())) {
@@ -160,23 +164,28 @@ object Interpreter {
               directionPointer += 4
             }
           }
+          // if the interpreter has found a new color block or more white space, move there
           else {
             nextRow = possRow
             nextCol = possCol
           }
         }
-        var nextCodel: Codel = prog.getCodel(nextRow, nextCol)
-        var hueChange: Int = nextCodel.getColor().getHue().id - currentCodel.getColor().getHue().id
-        if(hueChange < 0) {
-          hueChange += 6
-        }
-        var lightnessChange: Int = nextCodel.getColor().getLightness().id - currentCodel.getColor().getLightness().id
-        if(lightnessChange < 0) {
-          lightnessChange += 3
-        }
+        // only execute a command if the interpreter has not crossed white space
         if(!white) {
+          // calculate the hue and lightness to identify the command
+          var nextCodel: Codel = prog.getCodel(nextRow, nextCol)
+          var hueChange: Int = nextCodel.getColor().getHue().id - currentCodel.getColor().getHue().id
+          if(hueChange < 0) {
+            hueChange += 6
+          }
+          var lightnessChange: Int = nextCodel.getColor().getLightness().id - currentCodel.getColor().getLightness().id
+          if(lightnessChange < 0) {
+            lightnessChange += 3
+          }
+          // call the command
           doInstruction(hueChange, lightnessChange, currentCodel.getParent().getValue())
         }
+        // move the interpreter into the next space
         row = nextRow
         col = nextCol
         attemptCount = 0
