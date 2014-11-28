@@ -116,18 +116,16 @@ object Interpreter {
       var nextRow = edgeCodel.getRow()
       var nextCol = edgeCodel.getColumn()
       
-      var white = -1
+      var white = false
       
-      do{
-        if(directionPointer % 2 == 0) {
-          nextRow += directionPointer - 1
-        }
-        else {
-          nextCol += 2 - directionPointer
-        }
-        white += 1
-      } while (prog.onBoard(nextRow, nextCol) && prog.getCodel(nextRow, nextCol).getColor().getHue() == Hue.White);
-      if(!prog.onBoard(nextRow, nextCol) || prog.getCodel(nextRow, nextCol).getColor().getHue() == Hue.Black) {
+      if(directionPointer % 2 == 0) {
+        nextRow += directionPointer - 1
+      }
+      else {
+        nextCol += 2 - directionPointer
+      }
+      if(!prog.onBoard(nextRow, nextCol)
+         || prog.getCodel(nextRow, nextCol).getColor().getHue() == Hue.Black) {
         if(rotate) {
           directionPointer += 1
           directionPointer %= 4
@@ -140,16 +138,43 @@ object Interpreter {
         attemptCount += 1
       }
       else {
-        if(white == 0) {
-          var nextCodel: Codel = prog.getCodel(nextRow, nextCol)
-          var hueChange: Int = nextCodel.getColor().getHue().id - currentCodel.getColor().getHue().id
-          if(hueChange < 0) {
-            hueChange += 6
+        while(!prog.onBoard(nextRow, nextCol)
+            || prog.getCodel(nextRow, nextCol).getColor().getHue() == Hue.Black
+            || prog.getCodel(nextRow, nextCol).getColor().getHue() == Hue.White
+            || prog.getCodel(nextRow, nextCol).getParent().equals(currentCodel.getParent())) {
+          white = true
+          var possRow = nextRow
+          var possCol = nextCol
+          if(directionPointer % 2 == 0) {
+            possRow += directionPointer - 1
           }
-          var lightnessChange: Int = nextCodel.getColor().getLightness().id - currentCodel.getColor().getLightness().id
-          if(lightnessChange < 0) {
-            lightnessChange += 3
+          else {
+            possCol += 2 - directionPointer
           }
+          if(!prog.onBoard(possRow, possCol)
+              || prog.getCodel(possRow, possCol).getColor().getHue() == Hue.Black
+              || prog.getCodel(possRow, possCol).getParent().equals(currentCodel.getParent())) {
+            codelChooser *= -1
+            directionPointer -= 1
+            if(directionPointer < 0) {
+              directionPointer += 4
+            }
+          }
+          else {
+            nextRow = possRow
+            nextCol = possCol
+          }
+        }
+        var nextCodel: Codel = prog.getCodel(nextRow, nextCol)
+        var hueChange: Int = nextCodel.getColor().getHue().id - currentCodel.getColor().getHue().id
+        if(hueChange < 0) {
+          hueChange += 6
+        }
+        var lightnessChange: Int = nextCodel.getColor().getLightness().id - currentCodel.getColor().getLightness().id
+        if(lightnessChange < 0) {
+          lightnessChange += 3
+        }
+        if(!white) {
           doInstruction(hueChange, lightnessChange, currentCodel.getParent().getValue())
         }
         row = nextRow
