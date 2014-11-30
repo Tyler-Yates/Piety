@@ -79,13 +79,13 @@ object Interpreter {
 		  				var depth = stack.pop()
 		  				stack.roll(num, depth)}}
 		  	// in (number)
-		  	case 2 => stack.push(readInt())
+		  	case 2 => stack.push(scala.io.StdIn.readInt())
 		}
 	}
 	def hueChange5(lightnessChange: Int, cBValue: Int): Unit = {
 	  	lightnessChange match {
 	  		// in (char)
-	  		case 0 => stack.push(readChar().asInstanceOf[Int])
+	  		case 0 => stack.push(scala.io.StdIn.readChar().asInstanceOf[Int])
 	  		// out (number)
 		  	case 1 => {if(stack.size() > 0) {print(stack.pop())}}
 		  	// out (char)
