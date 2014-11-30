@@ -20,10 +20,9 @@ class IntegrationTest extends AssertionsForJUnit {
     testProg("hello_world2.gif", 1, "Hello, world!")
   }
   
-  /*
   @Test def testProg3() = {
-    testProg("hello_world3.gif", 1, "Hello, world!")
-  }*/
+    testProg("hello_world3.png", 1, "Hello world!")
+  }
   
   @Test def testProg4() = {
     testProg("alpha_filled.png", 1, "abcdefghijklmnopqrstuvwxyz")
