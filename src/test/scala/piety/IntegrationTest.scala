@@ -42,6 +42,15 @@ class IntegrationTest extends AssertionsForJUnit {
     testProgWithInput("factorial.png", 10, "5", "120")
   }
   
+  @Test def testProg7() = {
+    testProgWithInput("primetest.gif", 24, "2", "Y")
+    testProgWithInput("primetest.gif", 24, "3", "Y")
+    testProgWithInput("primetest.gif", 24, "4", "N")
+    testProgWithInput("primetest.gif", 24, "5", "Y")
+    testProgWithInput("primetest.gif", 24, "7817", "Y")
+    testProgWithInput("primetest.gif", 24, "7819", "N")
+  }
+  
   /*@Test def testProg5() = {
     testProg("piet.gif", 1, "Piet")
   }*/
