@@ -51,6 +51,10 @@ class IntegrationTest extends AssertionsForJUnit {
     testProgWithInput("primetest.gif", 24, "7819", "N")
   }
   
+  @Test def testProg8() = {
+    testProg("fibo.gif", 32, "0\n1\n1\n2\n3\n5\n8\n13\n21\n34\n55\n89\n144\n233\n377\n610\n987")
+  }
+  
   /*@Test def testProg5() = {
     testProg("piet.gif", 1, "Piet")
   }*/
