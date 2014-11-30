@@ -6,6 +6,7 @@ import org.junit.Test
 
 import javax.imageio.ImageIO
 import java.io.File
+import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.awt.Color
 
@@ -29,8 +30,21 @@ class IntegrationTest extends AssertionsForJUnit {
   }
   
   @Test def testProg5() = {
-    testProg("piet.gif", 1, "Piet")
+    testProg("hello_world4.png", 1, "Hello, world!")
   }
+  
+  @Test def testProg6() = {
+    testProgWithInput("factorial.png", 10, "0", "1")
+    testProgWithInput("factorial.png", 10, "1", "1")
+    testProgWithInput("factorial.png", 10, "2", "2")
+    testProgWithInput("factorial.png", 10, "3", "6")
+    testProgWithInput("factorial.png", 10, "4", "24")
+    testProgWithInput("factorial.png", 10, "5", "120")
+  }
+  
+  /*@Test def testProg5() = {
+    testProg("piet.gif", 1, "Piet")
+  }*/
   
   def testProg(fileName: String, codelSize: Int, expectedOutput: String) = {
     var prog: Program = new Program(ImageIO.read(new File(
@@ -40,6 +54,12 @@ class IntegrationTest extends AssertionsForJUnit {
     Console.withOut(stream) {
       Interpreter.execute(prog)
       assertEquals(expectedOutput, stream.toString().trim())
+    }
+  }
+  
+  def testProgWithInput(fileName: String, codelSize: Int, input: String, expectedOutput: String) = {
+    Console.withIn(new ByteArrayInputStream(input.getBytes())) {
+      testProg(fileName, codelSize, expectedOutput)
     }
   }
 }
