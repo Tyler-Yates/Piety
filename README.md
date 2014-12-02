@@ -22,4 +22,4 @@ CS 345H Final Project to implement the [Piet](http://en.wikipedia.org/wiki/Esote
 ####Valid Programs
 * Programs passed to Piety must conform to the Piet [specification](http://www.dangermouse.net/esoteric/piet.html).
 * Piety accepts programs in PNG and GIF formats. Other formats may work but these are the only ones explicitly supported.
-* PNG images should NOT contian alpha as this alters the colors defined in the specification
+* PNG images should NOT contain alpha as this alters the colors defined in the specification
