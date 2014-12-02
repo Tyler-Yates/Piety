@@ -59,6 +59,19 @@ class IntegrationTest extends AssertionsForJUnit {
     testProg("pi.png", 1, "31405")
   }
   
+  @Test def testProg10() = {
+    testProg("hello_world5.gif", 1, "Hello, world!")
+  }
+  
+  @Test def testProg11() = {
+    testProgWithInput("euclid.png", 10, "2\n2", "2")
+    testProgWithInput("euclid.png", 10, "10\n1", "1")
+    testProgWithInput("euclid.png", 10, "3\n9", "3")
+    testProgWithInput("euclid.png", 10, "9\n3", "3")
+    testProgWithInput("euclid.png", 10, "6\n4", "2")
+    //testProgWithInput("euclid.png", 10, "7\n5", "1") // This one doesn't work!
+  }
+  
   def testProg(fileName: String, codelSize: Int, expectedOutput: String) = {
     var prog: Program = new Program(ImageIO.read(new File(
       "src" + File.separator + "test" + File.separator + "resources" + File.separator + fileName)), codelSize)
