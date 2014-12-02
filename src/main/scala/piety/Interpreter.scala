@@ -130,8 +130,7 @@ object Interpreter {
       if(!prog.onBoard(nextRow, nextCol)
          || prog.getCodel(nextRow, nextCol).getColor().getHue() == Hue.Black) {
         if(rotate) {
-          directionPointer += 1
-          directionPointer %= 4
+          rotateDP(1)
           rotate = false
         }
         else {
@@ -159,10 +158,7 @@ object Interpreter {
               || prog.getCodel(possRow, possCol).getColor().getHue() == Hue.Black
               || prog.getCodel(possRow, possCol).getParent().equals(currentCodel.getParent())) {
             codelChooser *= -1
-            directionPointer -= 1
-            if(directionPointer < 0) {
-              directionPointer += 4
-            }
+            rotateDP(1)
           }
           // if the interpreter has found a new color block or more white space, move there
           else {
