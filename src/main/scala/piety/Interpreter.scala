@@ -155,8 +155,8 @@ object Interpreter {
           }
           // if the interpreter hits the edge, black space, or its original color block, rotate
           if(!prog.onBoard(possRow, possCol)
-              || prog.getCodel(possRow, possCol).getColor().getHue() == Hue.Black
-              || prog.getCodel(possRow, possCol).getParent().equals(currentCodel.getParent())) {
+              || prog.getCodel(possRow, possCol).getColor().getHue() == Hue.Black) {
+              //|| prog.getCodel(possRow, possCol).getParent().equals(currentCodel.getParent())) {
             codelChooser *= -1
             rotateDP(1)
           }
