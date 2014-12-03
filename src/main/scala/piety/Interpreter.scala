@@ -10,7 +10,12 @@ object Interpreter {
 
   // Used by the pietquest program to get newline characters after the single character input
   var newLine = false
-
+/**
+ * Every Piet instruction is a combination of hue change and lightness change.
+ * Therefore, we determine which of the six hue changes it is.
+ * Then the hueChangeN that we call will execute an instruction based on the 
+ * lightness change. 
+ */
   def doInstruction(hueChange: Int, lightnessChange: Int, cBValue: Int): Unit = {
     hueChange match {
       case 0 => hueChange0(lightnessChange, cBValue)
@@ -122,6 +127,7 @@ object Interpreter {
     }
   }
 
+  //This rotates the direction pointer clockwise by "n" times where n is the input.
   def rotateDP(rotation: Int): Unit = {
     directionPointer = (directionPointer + rotation) % 4
     if (directionPointer < 0) {
@@ -129,6 +135,10 @@ object Interpreter {
     }
   }
 
+  /**
+   * This is where a full program is executed. The stack is cleared,
+   * the DP and CC are reset, and the index is set to the upper left codel.
+   */
   def execute(prog: Program): Unit = {
     stack.clear()
     directionPointer = Direction.Right.id
@@ -149,6 +159,7 @@ object Interpreter {
       var white = false
 
       // look to see where the interpreter is headed
+      // determines if it is horizontal or vertical
       if (directionPointer % 2 == 0) {
         nextRow += directionPointer - 1
       } else {
@@ -173,6 +184,7 @@ object Interpreter {
           // we want to look to see where we're going before we move there
           var possRow = nextRow
           var possCol = nextCol
+          // once again determine the direction
           if (directionPointer % 2 == 0) {
             possRow += directionPointer - 1
           } else {

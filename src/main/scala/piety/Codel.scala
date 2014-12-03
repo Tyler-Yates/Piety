@@ -4,6 +4,8 @@ import java.awt.Color
 
 /**
  * Represents a single codel in a Piet program.
+ * A codel is the functional equivalent of a pixel in a picture
+ * that has been enlarged for easier viewing.
  */
 class Codel(val color: Color, val row: Int, val col: Int) {
   var pietColor = new PietColor(color)
@@ -11,6 +13,7 @@ class Codel(val color: Color, val row: Int, val col: Int) {
   var r: Int = row
   var c: Int = col
 
+  // The color block that this codel is part of.
   var parent: ColorBlock = null
 
   def getRow(): Int = {

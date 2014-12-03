@@ -4,11 +4,17 @@ import java.awt.Color
 import Hue._
 import Lightness._
 
+/**
+ * Defines a Piet color for use in the interpreter.
+ */
 class PietColor(val color: Color) {
 
   var hue: Hue = calculateHue(color)
   var lightness: Lightness = calculateLightness(color)
 
+/**
+ * Given an RGB, returns its hue.
+ */
   def calculateHue(color: Color): Hue = {
     color match {
       case LIGHT_RED     => return Hue.Red
@@ -41,6 +47,9 @@ class PietColor(val color: Color) {
     }
   }
 
+  /**
+   * Given an RGB, returns its Piet lightness.
+   */
   def calculateLightness(color: Color): Lightness = {
     color match {
       case LIGHT_RED     => return Lightness.Light

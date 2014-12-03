@@ -7,6 +7,9 @@ import java.awt.Color
 object Piety {
 
   def main(args: Array[String]): Unit = {
+    /**
+     * Running the program specifies a file path and codel size. 
+     */
     if (args.length == 2) {
       try {
         val filepath = args(0)
@@ -30,6 +33,10 @@ object Piety {
     }
   }
 
+  /**
+   * First converts the file into a readable form, prog, and then
+   * executes that program with the Interpreter. 
+   */
   def processImage(path: String, codelSize: Int): Unit = {
     val image = ImageIO.read(new File(path))
     val prog = new Program(image, codelSize)

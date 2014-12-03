@@ -2,6 +2,13 @@ package piety
 
 import scala.collection.mutable.ListBuffer
 
+/** 
+ * A ColorBlock is a group of codels, functionally a shape.
+ * It is of one congruent color and can contain other color blocks
+ * within it. 
+ * 
+ * For reference: DP = Direction Pointer; CC = Codel Chooser
+ */
 class ColorBlock(pietColor: PietColor) {
 
   var children: ListBuffer[Codel] = new ListBuffer[Codel]()
@@ -27,6 +34,11 @@ class ColorBlock(pietColor: PietColor) {
     return color
   }
 
+  /**
+   * Adds a codel to this color block. The codel's
+   * coordinates are read in to determine whether the 
+   * color block's edges need to be updated. 
+   */
   def addCodel(codel: Codel) = {
     children += codel
     codel.setParent(this)
@@ -165,6 +177,9 @@ class ColorBlock(pietColor: PietColor) {
     return this.hashCode() == other.hashCode()
   }
 
+  /**
+   * Given a DP and CC, return the corresponding neighbor color block.
+   */
   def getCodel(dp: Int, cc: Int): Codel = {
     if(dp == Direction.Up.id) {
       if(cc == (2 - Direction.Left.id)) {

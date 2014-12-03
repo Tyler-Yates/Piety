@@ -2,6 +2,9 @@ package piety
 
 import java.awt.Color
 
+/**
+ * Defines all the colors that are used in Piet based on RGB
+ */
 object Hue extends Enumeration {
   type Hue = Value
   val Red, Yellow, Green, Cyan, Blue, Magenta, White, Black = Value

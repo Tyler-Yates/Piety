@@ -1,5 +1,9 @@
 package piety
 
+/**
+ * Defines the stack used in Piet programs.
+ * It is currently implemented as a list, this is subject to change.
+ */
 class PietStack {
   var stack = new scala.collection.mutable.MutableList[Int]()
 
@@ -21,6 +25,11 @@ class PietStack {
     stack.clear()
   }
   
+  /**
+   * Takes the top of the stack and buries it by the depth.
+   * A depth of 0 is no change.
+   * Number of rolls is the number of times this is done.
+   */
   def roll(numberOfRolls: Int, depth: Int) = {
     if(depth < 0) {
       throw new IllegalArgumentException("Negative depth not allowed")
