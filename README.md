@@ -1,7 +1,7 @@
 Piety
 =====
 
-CS 345H Final Project to implement the [Piet](http://en.wikipedia.org/wiki/Esoteric_programming_language#Piet) programming language in Scala.
+CS 345H Final Project to implement the [Piet](http://en.wikipedia.org/wiki/Esoteric_programming_language#Piet) programming language in Scala. A [presentation](https://docs.google.com/presentation/d/1hhwky73h1fhp_I9xM_D9acZCuDa9-0si0MR9dX6ohdk/edit?usp=sharing) about this project is hosted on Google Drive.
 
 ##Requirements
 
