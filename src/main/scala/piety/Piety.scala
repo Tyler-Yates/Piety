@@ -3,6 +3,7 @@ package piety
 import javax.imageio.ImageIO
 import java.io.File
 import java.awt.Color
+import java.io.PrintStream
 
 object Piety {
 
@@ -28,9 +29,35 @@ object Piety {
       } catch {
         case e: NumberFormatException => println("Second argument must be a number representing the codel size of the program")
       }
-    } else {
+    } 
+    else if (args.length == 3) {
+      try {
+        val inputPath = args(0)
+        val outputPath = args(2)
+        if (new File(inputPath).exists()) {
+          val codelSize = args(1).toInt
+
+          if (codelSize > 0) {
+            compileImage(inputPath, codelSize, outputPath)
+          } else {
+            println("Codel size must be greater than zero")
+          }
+        } else {
+          println("File does not exist")
+        }
+      } catch {
+        case e: Exception => println(e)
+      }
+    }
+    else {
       println("Program requires two input arguments: [program file path] [codel size]")
     }
+  }
+  
+  def compileImage(inputPath: String, codelSize: Int, outputPath: String): Unit = {
+    val image = ImageIO.read(new File(inputPath))
+    val prog = new Program(image, codelSize)
+    prog.compileImage(image, codelSize, new PrintStream(new File(outputPath)))
   }
 
   /**
