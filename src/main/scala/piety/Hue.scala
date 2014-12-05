@@ -34,4 +34,6 @@ object Hue extends Enumeration {
   val DARK_MAGENTA = new Color(192, 0, 192)
   //
   val BLACK = new Color(0, 0, 0)
+  //
+  val WHITE = new Color(255, 255, 255)
 }

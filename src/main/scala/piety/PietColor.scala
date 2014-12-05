@@ -11,6 +11,7 @@ class PietColor(val color: Color) {
 
   var hue: Hue = calculateHue(color)
   var lightness: Lightness = calculateLightness(color)
+  var valid: Boolean = isValid(color)
 
 /**
  * Given an RGB, returns its hue.
@@ -74,6 +75,37 @@ class PietColor(val color: Color) {
       case DARK_MAGENTA  => return Lightness.Dark
 
       case _             => return Lightness.Normal
+    }
+  }
+  
+  /**
+   * Determines whether the given color is one of the defined RGB values
+   * for Piet colors. Returns a boolean.
+   */
+  def isValid(color: Color): Boolean = {
+    color match {
+      case LIGHT_RED     => return true
+      case RED           => return true
+      case DARK_RED      => return true
+      case LIGHT_YELLOW  => return true
+      case YELLOW        => return true
+      case DARK_YELLOW   => return true
+      case LIGHT_GREEN   => return true
+      case GREEN         => return true
+      case DARK_GREEN    => return true
+      case LIGHT_CYAN    => return true
+      case CYAN          => return true
+      case DARK_CYAN     => return true
+      case LIGHT_BLUE    => return true
+      case BLUE          => return true
+      case DARK_BLUE     => return true
+      case LIGHT_MAGENTA => return true
+      case MAGENTA       => return true
+      case DARK_MAGENTA  => return true
+      case BLACK         => return true
+      case WHITE         => return true
+
+      case _             => return false
     }
   }
 
