@@ -30,27 +30,33 @@ class PietDSL {
 			throw new IllegalArgumentException("Argument must be positive")
 		rows = i
 		if (cols != 0)
-		  prog = new Program(rows, cols)
+		  createMatrixAndProgram()
 	}
 	def COLUMNS(i: Int) {
 		if(i <= 0) 
 			throw new IllegalArgumentException("Argument must be positive")
 		cols = i
 		if (rows != 0)
-		  prog = new Program(rows, cols) 
+		  createMatrixAndProgram()
 	}
+  
+  def createMatrixAndProgram() {
+      if(stack == null) {
+        stack = new PietStack()
+      }
+      prog = new Program(rows, cols, stack)
+  }
 	
 	object PIET {
-	 // def apply() {
+	  def apply(ignored: Unit) {
 		  if(prog == null)
 			  throw new IllegalStateException("YOU ARE DUMB")
 		  Interpreter.execute(prog)
-	  //}
-	  /*
+	  }
+	  
 	  def apply(c:Int, s:String) {
 	    Piety.executeImage(s, c)
 	  }
-	  */
 	}
 	
 	var currentRow = 0
@@ -60,7 +66,8 @@ class PietDSL {
 		if (rows <= 0 || cols <= 0)
 			throw new IllegalStateException("rows/cols not instantiated")
 		var currentCodel = new Codel(c, currentRow, currentCol)
-		prog.addCodel(currentCodel)
+		
+    	prog.addCodel(currentCodel)
 		
 		currentCol += 1
 		if (currentCol >= cols) {

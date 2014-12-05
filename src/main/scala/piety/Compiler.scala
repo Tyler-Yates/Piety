@@ -45,6 +45,7 @@ object Compiler {
     output.print("import piety._\r\n\r\n")
     output.print("object " + out.substring(out.lastIndexOf("\\")+1, out.lastIndexOf(".")) + " extends PietDSL {\r\n")
     output.print("\tdef main(args: Array[String]): Unit = {\r\n")
+    output.print("\t\tBLANK_SPACE\r\n")
     output.print("\t\tROWS(" + arrayRows + ")\r\n")
     output.print("\t\tCOLUMNS(" + arrayColumns + ")\r\n")
     
@@ -86,7 +87,7 @@ object Compiler {
       }
       output.print("\r\n")
     }
-    output.print("\t\tPIET\r\n")
+    output.print("\t\tPIET()\r\n")
     output.print("\t}\r\n")
     output.print("}\r\n\r\n")
   }
