@@ -12,6 +12,10 @@ class DSLTest extends AssertionsForJUnit {
     testDSL(HelloWorldDSL, "Hello, world!")
   }
 
+  @Test def testAlphabet(): Unit = {
+    testDSL(AlphabetDSL, "abcdefghijklmnopqrstuvwxyz")
+  }
+
   def testDSL(dsl: DSL, expectedOutput: String) = {
     val stream = new ByteArrayOutputStream()
     Console.withOut(stream) {
@@ -55,6 +59,27 @@ object HelloWorldDSL extends DSL {
     nc; nc; bb; nc; nc; dc; ng; ng; bb; ng; ng; dg; ny; ny; bb; ny; ny; dy; nr; nr; bb; nr; nr; dr; nm; nm; bb; nm; nm; dm; nb; nb; bb; nb; nb; db; nc; nc; bb; nc; nc; dc; ng; ng; ng; ng; ng; dg; ny; ny; bb; ny; ny; dy; nr; nr; bb; nr; nr; dr; nm; nm; bb; nm; nm; dm; nb; nb; bb; nb; nb; db; nc; nc; bb; nc; nc; dc; dg; dg; ng; dg; dg;
     nc; nc; nc; nc; nc; dc; ng; ng; ng; ng; ng; dg; ny; ny; ny; ny; ny; dy; nr; nr; nr; nr; nr; dr; nm; nm; nm; nm; nm; dm; nb; nb; nb; nb; nb; db; nc; nc; nc; nc; nc; dc; ng; ng; ng; ng; ng; dg; ny; ny; ny; ny; ny; dy; nr; nr; nr; nr; nr; dr; nm; nm; nm; nm; nm; dm; nb; nb; nb; nb; nb; db; nc; nc; nc; nc; nc; dc; ng; ng; ng; ng; ng;
     nc; nc; nc; nc; nc; dc; ng; ng; ng; ng; ng; dg; ny; ny; ny; ny; ny; dy; nr; nr; nr; nr; nr; dr; nm; nm; nm; nm; nm; dm; nb; nb; nb; nb; nb; db; nc; nc; nc; nc; nc; dc; ng; ng; ng; ng; ng; dg; ny; ny; ny; ny; ny; dy; nr; nr; nr; nr; nr; dr; nm; nm; nm; nm; nm; dm; nb; nb; nb; nb; nb; db; nc; nc; nc; nc; nc; dc; ng; ng; dg; ng; ng;
+    PIET()
+  }
+}
+
+object AlphabetDSL extends DSL {
+  def run(): Unit = {
+    BLANK_SPACE
+    ROWS(12)
+    COLUMNS(45)
+    dr; dr; dr; dr; dr; dr; lr; lr; nr; nr; nr; dr; dy; dy; dy; dg; lg; lc; ly; lm; db; db; db; db; db; db; db; db; lb; lg; lc; lc; nc; db; dy; nc; dr; nr; dr; nr; dr; lr; nc; dc; nc;
+    dr; dr; dr; dr; dr; dr; lr; lr; nr; nr; lg; dr; dy; dy; dy; nm; nb; lb; db; lc; db; db; db; db; db; db; db; db; dm; lb; lc; lc; dc; lg; dg; ny; lr; lg; dg; ny; lr; bb; lr; bb; dc;
+    dr; dr; dr; dr; dr; dr; lr; lr; nr; nr; nb; dr; dy; dy; dy; nm; lb; db; lc; dc; db; db; db; db; db; db; db; db; lb; db; lc; lc; lg; dg; ly; dy; nr; ly; dy; nr; bb; lb; lb; lb; bb;
+    dr; dr; dr; dr; dr; dr; lr; lr; dc; bb; bb; bb; bb; dc; nb; ww; nm; lb; db; lc; db; db; db; db; db; db; db; db; dm; lb; lc; bb; dc; lg; dg; ny; ly; dm; lb; lc; bb; bb; lb; bb; dg;
+    dr; dr; dr; dr; dr; lr; lr; lr; bb; bb; nc; nc; bb; bb; dc; nb; lb; db; lc; dc; db; db; db; db; db; db; db; db; lb; db; nc; dc; lg; dg; ly; dy; ny; lg; dg; ly; dy; ny; bb; dg; nb;
+    dr; dr; dr; dr; dr; lr; lr; lr; bb; nc; bb; bb; nc; bb; nc; dc; nb; lb; db; lc; db; db; db; db; db; db; db; db; dm; lb; db; lc; dc; lg; dg; ly; lg; bb; bb; bb; bb; bb; bb; bb; dc;
+    dr; dr; dr; dr; dr; lr; lr; lr; bb; nc; bb; bb; nc; bb; dg; nc; lb; db; lc; dc; db; db; db; db; db; db; db; db; lb; db; lc; dc; lg; dg; ly; dy; ng; bb; nc; nc; nc; nc; nc; bb; nc;
+    dr; dr; dr; dr; dr; lr; lr; lb; bb; nc; nc; nc; nc; bb; ng; dg; nc; lb; db; lc; db; db; db; db; db; db; db; db; dm; lb; db; lc; dc; lg; dg; ly; lc; lr; bb; bb; bb; nc; bb; bb; dg;
+    dr; dr; dr; dr; dr; lr; lr; nc; bb; nc; bb; bb; nc; bb; dy; ng; lb; db; lc; dc; lg; dg; ly; dy; lr; dr; lm; dm; lb; db; lc; dc; lg; dg; ly; dy; nc; nm; bb; bb; nc; bb; bb; dg; ng;
+    dr; dr; dr; dr; dr; lr; lr; lb; bb; nc; bb; bb; nc; bb; ny; dy; ng; lb; db; lc; dc; lg; dg; ly; dy; lr; dr; lm; dm; lb; db; lc; dc; lg; dg; ly; lb; bb; bb; nc; bb; bb; bb; bb; dy;
+    dr; dr; dr; dr; dr; lr; lb; ng; bb; nc; bb; bb; nc; bb; nb; ny; lb; db; lc; dc; lg; dg; ly; dy; lr; dr; lm; dm; lb; db; lc; dc; lg; dg; ly; dy; ny; bb; nc; nc; nc; nc; nc; bb; ny;
+    dr; dr; dr; dr; dr; lr; ng; lb; bb; bb; bb; bb; bb; bb; dc; nb; ny; lb; db; lc; dc; lg; dg; ly; dy; lr; dr; lm; dm; lb; db; lc; dc; lg; dg; ly; dy; bb; bb; bb; bb; bb; bb; bb; nb;
     PIET()
   }
 }
