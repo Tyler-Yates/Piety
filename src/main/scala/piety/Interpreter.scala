@@ -140,7 +140,7 @@ object Interpreter {
    * the DP and CC are reset, and the index is set to the upper left codel.
    */
   def execute(prog: Program): Unit = {
-    stack = prog.stack()
+    stack.clear()
     directionPointer = Direction.Right.id
     codelChooser = 2 - Direction.Left.id
 
