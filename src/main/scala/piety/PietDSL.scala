@@ -9,7 +9,7 @@ class PietDSL {
 	
 	var rows = 0
 	var cols = 0
-	var codels : Array[Array[Codel]] = null
+	var prog:Program = null
 	var stack: PietStack = null
 	
 	/**
@@ -30,25 +30,27 @@ class PietDSL {
 			throw new IllegalArgumentException("Argument must be positive")
 		rows = i
 		if (cols != 0)
-		  codels = Array.ofDim[Codel](rows, cols)
+		  prog = new Program(rows, cols)
 	}
 	def COLUMNS(i: Int) {
 		if(i <= 0) 
 			throw new IllegalArgumentException("Argument must be positive")
 		cols = i
 		if (rows != 0)
-		  codels = Array.ofDim[Codel](rows, cols) 
+		  prog = new Program(rows, cols) 
 	}
 	
 	object PIET {
-	  def apply() {
-		  if(codels == null)
+	 // def apply() {
+		  if(prog == null)
 			  throw new IllegalStateException("YOU ARE DUMB")
-		  Piety.processArray(codels)
-	  }
+		  Interpreter.execute(prog)
+	  //}
+	  /*
 	  def apply(c:Int, s:String) {
 	    Piety.executeImage(s, c)
 	  }
+	  */
 	}
 	
 	var currentRow = 0
@@ -58,40 +60,10 @@ class PietDSL {
 		if (rows <= 0 || cols <= 0)
 			throw new IllegalStateException("rows/cols not instantiated")
 		var currentCodel = new Codel(c, currentRow, currentCol)
-		codels(currentRow)(currentCol) = currentCodel
-		
-		var aboveCodel: Codel = null
-        var leftCodel: Codel = null
-
-        // Since we are reading the image left-to-right top-to-bottom, only the codels above and to the left of
-        // the current codel (if they exist) will have been initialized
-        if (currentRow > 0) {
-          aboveCodel = codels(currentRow - 1)(currentCol)
-        }
-        if (currentCol > 0) {
-          leftCodel = codels(currentRow)(currentCol - 1)
-        }
-		
-		var parent: ColorBlock = null
-        // Determine if the codel should be assigned to an existing color block
-        if (aboveCodel != null && aboveCodel.hasSameColorAs(currentCodel)) {
-          // If both codels are in the same block then we need to combine the two blocks
-          if (leftCodel != null && leftCodel.hasSameColorAs(currentCodel)) {
-            // Merge the two blocks
-            aboveCodel.getParent().mergeColorBlock(leftCodel.getParent())
-          }
-          parent = aboveCodel.getParent()
-        } else if (leftCodel != null && leftCodel.hasSameColorAs(currentCodel)) {
-          parent = leftCodel.getParent()
-        }
-        
-        if (parent == null) {
-          parent = new ColorBlock(currentCodel.getColor())
-        }
-        parent.addCodel(currentCodel)
+		prog.addCodel(currentCodel)
 		
 		currentCol += 1
-		if (currentCol >= rows) {
+		if (currentCol >= cols) {
 			currentCol = 0
 			currentRow += 1
 		}
