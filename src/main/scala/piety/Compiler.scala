@@ -3,12 +3,35 @@ package piety
 import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io._
+import javax.imageio.ImageIO
 import Hue._
 
 /**
  * Used to turn an image file into ScalaPiet DSL code.
  */
 object Compiler {
+  
+  def main(args: Array[String]): Unit = {
+    if (args.length == 3) {
+      try {
+        val inputPath = args(0)
+        val outputPath = args(2)
+        if (new File(inputPath).exists()) {
+          val codelSize = args(1).toInt
+
+          if (codelSize > 0) {
+            compileImage(ImageIO.read(new File(inputPath)), codelSize, outputPath)
+          } else {
+            println("Codel size must be greater than zero")
+          }
+        } else {
+          println("File does not exist")
+        }
+      } catch {
+        case e: Exception => println(e)
+      }
+    }
+  }
 
   /**
    * Takes in an image and codel size and prints out the corresponding ScalaPiet DSL
