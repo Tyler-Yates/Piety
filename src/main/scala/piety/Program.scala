@@ -49,6 +49,15 @@ class Program(rows: Int, columns: Int, stack: PietStack = new PietStack()) {
     parent.addCodel(codel)
 
     codels(r)(c) = codel
+
+    if (r == rows - 1 && c == columns - 1) {
+      for (r <- 0 until rows) {
+        for (c <- 0 until columns) {
+          var currentCodel: Codel = codels(r)(c)
+          currentCodel.getParent().findEightExtremes(codels)
+        }
+      }
+    }
   }
 
   /**
@@ -73,7 +82,6 @@ class Program(rows: Int, columns: Int, stack: PietStack = new PietStack()) {
     }
     return false
   }
-  
   def getStack(): PietStack = {
     return stack
   }

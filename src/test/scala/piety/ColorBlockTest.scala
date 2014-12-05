@@ -14,7 +14,7 @@ class ColorBlockTest extends AssertionsForJUnit {
   var prog: Program = _
 
   @Before def initialize() = {
-    prog = new Program(ImageIO.read(new File(
+    prog = ProgramFactory.createProgramFromImage(ImageIO.read(new File(
       "src" + File.separator + "test" + File.separator + "resources" + File.separator + "test1.gif")), 1)
   }
 
@@ -54,22 +54,22 @@ class ColorBlockTest extends AssertionsForJUnit {
     assertEquals(codelUpperRight, block2.upLeft)
     assertEquals(codelUpperRight, block2.upRight)
   }
-  
+
   @Test def testMerge() = {
     val block1: ColorBlock = new ColorBlock(new PietColor(Color.RED))
     val block2: ColorBlock = new ColorBlock(new PietColor(Color.RED))
-    
+
     val codel1 = new Codel(Color.RED, 0, 0)
     val codel2 = new Codel(Color.RED, 1, 0)
     val codel3 = new Codel(Color.RED, 0, 1)
     val codel4 = new Codel(Color.RED, 1, 1)
-    
+
     block1.addCodel(codel1)
     block1.addCodel(codel2)
-    
+
     block2.addCodel(codel3)
     block2.addCodel(codel4)
-    
+
     block1.mergeColorBlock(block2)
     assertSame(block1, codel1.getParent())
     assertSame(block1, codel2.getParent())
