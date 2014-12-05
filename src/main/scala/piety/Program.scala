@@ -10,14 +10,12 @@ import Hue._
 class Program(img: BufferedImage, codelSize: Int) {
   // The program is composed of a matrix of codels which abstracts away the pixel size of the program's image.
   var codels = processImage(img, codelSize)
-  
-  
-  
+
   /**
    * Processes an image representing a Piet program with the given codel size.
    */
-  def processImage(	img: BufferedImage, codelSize: Int): Array[Array[Codel]] = {
-    
+  def processImage(img: BufferedImage, codelSize: Int): Array[Array[Codel]] = {
+
     val arrayColumns = img.getWidth() / codelSize
     val arrayRows = img.getHeight() / codelSize
     var cod = Array.ofDim[Codel](arrayRows, arrayColumns)
@@ -54,7 +52,7 @@ class Program(img: BufferedImage, codelSize: Int) {
         } else if (leftCodel != null && leftCodel.hasSameColorAs(currentCodel)) {
           parent = leftCodel.getParent()
         }
-        
+
         if (parent == null) {
           parent = new ColorBlock(currentCodel.getColor())
         }
@@ -79,11 +77,20 @@ class Program(img: BufferedImage, codelSize: Int) {
    * Returns the codel at the given row and column in the codel matrix.
    */
   def getCodel(r: Int, c: Int): Codel = {
-    return codels(r)(c)
+    if (!onBoard(r, c)) {
+      throw new IllegalArgumentException("Row and column not on the board.")
+    }
+
+    val codel = codels(r)(c)
+
+    if (codel == null) {
+      throw new IllegalStateException("Program has not been fully initialized! A codel is missing from the board.")
+    }
+    return codel
   }
-  
+
   def onBoard(r: Int, c: Int): Boolean = {
-    if(r > -1 && c > -1 && r < codels.size && c < codels(0).size) {
+    if (r > -1 && c > -1 && r < codels.size && c < codels(0).size) {
       return true
     }
     return false
