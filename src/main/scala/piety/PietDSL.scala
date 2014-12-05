@@ -47,7 +47,7 @@ class PietDSL {
 		  Piety.processArray(codels)
 	  }
 	  def apply(c:Int, s:String) {
-	    Piety.processImage(s, c)
+	    Piety.executeImage(s, c)
 	  }
 	}
 	
