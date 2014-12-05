@@ -5,8 +5,15 @@ import java.awt.image.BufferedImage
 import java.io.PrintStream
 import Hue._
 
+/**
+ * Used to turn an image file into ScalaPiet DSL code.
+ */
 object Compiler {
 
+  /**
+   * Takes in an image and codel size and prints out the corresponding ScalaPiet DSL
+   * code to the given PrintStream.
+   */
   def compileImage(img: BufferedImage, codelSize: Int, output: PrintStream): Unit = {
     val arrayColumns = img.getWidth() / codelSize
     val arrayRows = img.getHeight() / codelSize
