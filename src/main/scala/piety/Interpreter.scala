@@ -4,7 +4,7 @@ import scala.math
 
 object Interpreter {
 
-  val stack = new PietStack
+  var stack = new PietStack
   var directionPointer: Int = Direction.Right.id
   var codelChooser: Int = 2 - Direction.Left.id
 
@@ -140,7 +140,7 @@ object Interpreter {
    * the DP and CC are reset, and the index is set to the upper left codel.
    */
   def execute(prog: Program): Unit = {
-    stack.clear()
+    stack = prog.stack()
     directionPointer = Direction.Right.id
     codelChooser = 2 - Direction.Left.id
 

@@ -56,6 +56,8 @@ class Program(img: BufferedImage, codelSize: Int) {
     }
   }
   
+  
+  
   /**
    * Processes an image representing a Piet program with the given codel size.
    */

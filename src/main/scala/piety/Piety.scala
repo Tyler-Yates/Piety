@@ -70,4 +70,9 @@ object Piety {
 
     Interpreter.execute(prog)
   }
+  
+  
+  def processArray(ray: Array[Array[Codel]]): Unit = {
+    
+  }
 }
