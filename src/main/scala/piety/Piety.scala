@@ -57,7 +57,7 @@ object Piety {
   def compileImage(inputPath: String, codelSize: Int, outputPath: String): Unit = {
     val image = ImageIO.read(new File(inputPath))
     val prog = new Program(image, codelSize)
-    prog.compileImage(image, codelSize, new PrintStream(new File(outputPath)))
+    Compiler.compileImage(image, codelSize, new PrintStream(new File(outputPath)))
   }
 
   /**
