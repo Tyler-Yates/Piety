@@ -16,8 +16,17 @@ CS 345H Final Project to implement the [Piet](http://en.wikipedia.org/wiki/Esote
 * Use `scalac -d [where to put compiled files] src/main/scala/piety/*.scala`
  
 ####Running
-* Open a terminal in the directory where the compiled files were saved
+Open a terminal in the directory where the compiled files were saved
+
+#####External DSL (Image -> Program Execution)
 * Use `scala piety.Piety [program file path] [codel size]` to run the program
+
+#####Generating Internal DSL (Image -> Piet DSL Text)
+* Use `scala piety.Compiler [program file path] [codel size] [output file path]` to compile image to a scala file
+
+#####Internal DSL (Piet DSL Text -> Program Execution)
+* Use `scala [name of .scala file]` to run the Internal DSL text
+* The compiled scala file must be in the same directory as the PietDSL class
 
 ####Valid Programs
 * Programs passed to Piety must conform to the Piet [specification](http://www.dangermouse.net/esoteric/piet.html).
