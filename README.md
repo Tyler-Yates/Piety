@@ -5,7 +5,9 @@ CS 345H Final Project to implement the [Piet](http://en.wikipedia.org/wiki/Esote
 
 We support both an internal and external version of the Piet DSL. The external Piet directly reads from an image to determine program execution. This is how Piet was designed to work, but it is not easily representable within Scala other code. 
 
-Therefore, we also support an internal, text-based representation of Piet images, along with a handful of basic commands. Our Compiler can then transform an image into a Scala file containing these DSL commands. Then, running this file will call the Interpeter, just as if the text was actually an image.
+Therefore, we also support an internal, text-based representation of Piet images, along with a handful of basic commands. Our Compiler can then transform an image into a Scala file containing these DSL commands. Then, running this file will call the Interpeter, just as if the text was an actual image.
+
+Since Scala is a stack-based language, we allow the user to provide the program with a stack to operate on, so that the Piet program can be better integrated with other (non-Piet) code.
 
 ##Requirements
 
