@@ -70,7 +70,7 @@ class IntegrationTest extends AssertionsForJUnit {
     testProgWithInput("euclid.png", 10, "6\n4", "2")
     //testProgWithInput("euclid.png", 10, "7\n5", "1") // This one doesn't work!
   }
-  
+
   @Test def testBadProg1() = {
     try {
       testProg("bad_color.gif", 11, "")
@@ -79,14 +79,14 @@ class IntegrationTest extends AssertionsForJUnit {
       case e: Exception => assert(true)
     }
   }
-    
+
   @Test def testBadProg2() = {
     try {
       testProg("bad_dimensions.gif", 11, "")
       assert(false)
     } catch {
       case e: Exception => assert(true)
-    } 
+    }
   }
 
   def testProg(fileName: String, codelSize: Int, expectedOutput: String) = {

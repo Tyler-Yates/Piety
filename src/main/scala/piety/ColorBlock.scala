@@ -2,11 +2,11 @@ package piety
 
 import scala.collection.mutable.ListBuffer
 
-/** 
+/**
  * A ColorBlock is a group of codels, functionally a shape.
  * It is of one congruent color and can contain other color blocks
- * within it. 
- * 
+ * within it.
+ *
  * For reference: DP = Direction Pointer; CC = Codel Chooser
  */
 class ColorBlock(pietColor: PietColor) {
@@ -14,7 +14,7 @@ class ColorBlock(pietColor: PietColor) {
   var children: ListBuffer[Codel] = new ListBuffer[Codel]()
 
   var color: PietColor = pietColor
-  
+
   var topEdge: Int = Integer.MAX_VALUE
   var bottomEdge: Int = Integer.MIN_VALUE
   var leftEdge: Int = Integer.MAX_VALUE
@@ -29,15 +29,15 @@ class ColorBlock(pietColor: PietColor) {
   var leftRight: Codel = null
   var upLeft: Codel = null
   var upRight: Codel = null
-  
+
   def getColor(): PietColor = {
     return color
   }
 
   /**
    * Adds a codel to this color block. The codel's
-   * coordinates are read in to determine whether the 
-   * color block's edges need to be updated. 
+   * coordinates are read in to determine whether the
+   * color block's edges need to be updated.
    */
   def addCodel(codel: Codel) = {
     children += codel
@@ -66,25 +66,25 @@ class ColorBlock(pietColor: PietColor) {
    */
   def mergeColorBlock(otherBlock: ColorBlock) {
     // Only blocks with the same color can be merged
-    if(!color.equals(otherBlock.getColor())) {
+    if (!color.equals(otherBlock.getColor())) {
       throw new IllegalArgumentException("Color blocks must have same color to merge")
     }
-    
+
     // Don't merge the same block
-    if(otherBlock eq this) {
+    if (otherBlock eq this) {
       return
     }
-    
+
     // Update the parent pointer of the other block's codels
-    for(child <- otherBlock.children) {
+    for (child <- otherBlock.children) {
       child.setParent(this)
     }
-    
+
     // Add the other block's codels to the current block
     children ++= otherBlock.children
-    
+
     // Update the edges of the current block
-    if(otherBlock.topEdge < topEdge) {
+    if (otherBlock.topEdge < topEdge) {
       topEdge = otherBlock.topEdge
     }
     if (otherBlock.bottomEdge > bottomEdge) {
@@ -172,7 +172,7 @@ class ColorBlock(pietColor: PietColor) {
       }
     }
   }
-  
+
   override def equals(other: Any): Boolean = {
     return this.hashCode() == other.hashCode()
   }
@@ -181,44 +181,37 @@ class ColorBlock(pietColor: PietColor) {
    * Given a DP and CC, return the corresponding neighbor color block.
    */
   def getCodel(dp: Int, cc: Int): Codel = {
-    if(dp == Direction.Up.id) {
-      if(cc == (2 - Direction.Left.id)) {
+    if (dp == Direction.Up.id) {
+      if (cc == (2 - Direction.Left.id)) {
         return upLeft
-      }
-      else {
+      } else {
         return upRight
       }
-    }
-    else if(dp == Direction.Right.id) {
-      if(cc == (2 - Direction.Left.id)) {
+    } else if (dp == Direction.Right.id) {
+      if (cc == (2 - Direction.Left.id)) {
         return rightLeft
-      }
-      else {
+      } else {
         return rightRight
       }
-    }
-    else if(dp == Direction.Down.id) {
-      if(cc == (2 - Direction.Left.id)) {
+    } else if (dp == Direction.Down.id) {
+      if (cc == (2 - Direction.Left.id)) {
         return downLeft
-      }
-      else {
+      } else {
         return downRight
       }
-    }
-    else {
-      if(cc == (2 - Direction.Left.id)) {
+    } else {
+      if (cc == (2 - Direction.Left.id)) {
         return leftLeft
-      }
-      else {
+      } else {
         return leftRight
       }
     }
   }
-  
+
   def getValue(): Int = {
     return children.size
   }
-  
+
   override def toString(): String = {
     return "Color: " + color.toString() + "\nExtremes:\n" +
       rightLeft.toString() + "\n" +

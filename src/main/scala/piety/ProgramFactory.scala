@@ -10,7 +10,7 @@ object ProgramFactory {
       throw new IllegalArgumentException("Image has invalid dimensions relative to codel size")
     val arrayColumns = img.getWidth() / codelSize
     val arrayRows = img.getHeight() / codelSize
-    
+
     val prog = new Program(arrayRows, arrayColumns)
 
     // Build the program codel by codel

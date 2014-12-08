@@ -10,12 +10,12 @@ object Interpreter {
 
   // Used by the pietquest program to get newline characters after the single character input
   var newLine = false
-/**
- * Every Piet instruction is a combination of hue change and lightness change.
- * Therefore, we determine which of the six hue changes it is.
- * Then the hueChangeN that we call will execute an instruction based on the 
- * lightness change. 
- */
+  /**
+   * Every Piet instruction is a combination of hue change and lightness change.
+   * Therefore, we determine which of the six hue changes it is.
+   * Then the hueChangeN that we call will execute an instruction based on the
+   * lightness change.
+   */
   def doInstruction(hueChange: Int, lightnessChange: Int, cBValue: Int): Unit = {
     hueChange match {
       case 0 => hueChange0(lightnessChange, cBValue)

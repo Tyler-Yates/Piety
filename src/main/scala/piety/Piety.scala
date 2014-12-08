@@ -9,7 +9,7 @@ object Piety {
 
   def main(args: Array[String]): Unit = {
     /**
-     * Running the program specifies a file path and codel size. 
+     * Running the program specifies a file path and codel size.
      */
     if (args.length == 2) {
       try {
@@ -29,15 +29,14 @@ object Piety {
       } catch {
         case e: NumberFormatException => println("Second argument must be a number representing the codel size of the program")
       }
-    }
-    else {
+    } else {
       println("Program requires two input arguments: [program file path] [codel size]")
     }
   }
 
   /**
    * First converts the file into a readable form, a Program, and then
-   * executes that program with the Interpreter. 
+   * executes that program with the Interpreter.
    */
   def executeImage(path: String, codelSize: Int): Unit = {
     val image = ImageIO.read(new File(path))

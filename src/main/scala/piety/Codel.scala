@@ -38,7 +38,7 @@ class Codel(val color: Color, val row: Int, val col: Int) {
   override def toString(): String = {
     return "Row: " + r + " Column: " + c + " Color: " + pietColor.toString()
   }
-  
+
   def hasSameColorAs(other: Codel): Boolean = {
     return pietColor.equals(other.getColor())
   }
@@ -58,7 +58,7 @@ class Codel(val color: Color, val row: Int, val col: Int) {
 
     return parent
   }
-  
+
   /**
    * Returns the Codel at the edge of this Codel's ColorBlock
    */

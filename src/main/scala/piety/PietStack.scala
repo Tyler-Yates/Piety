@@ -10,32 +10,32 @@ class PietStack {
   def push(value: Int) = {
     stack += value
   }
-  
+
   def pop(): Int = {
     val ret = stack.last
     stack = stack.init
     return ret
   }
-  
+
   def size(): Int = {
     return stack.length
   }
-  
+
   def clear() = {
     stack.clear()
   }
-  
+
   /**
    * Takes the top of the stack and buries it by the depth.
    * A depth of 0 is no change.
    * Number of rolls is the number of times this is done.
    */
   def roll(numberOfRolls: Int, depth: Int) = {
-    if(depth < 0) {
+    if (depth < 0) {
       throw new IllegalArgumentException("Negative depth not allowed")
     }
-    
-    if(numberOfRolls > 0) {
+
+    if (numberOfRolls > 0) {
       for (i <- 0 until numberOfRolls) {
         val first = stack.dropRight(depth)
         val top = stack.takeRight(depth)
@@ -43,8 +43,7 @@ class PietStack {
         val last = top.dropRight(1)
         stack = (first :+ mid) ++ last
       }
-    }
-    else if(numberOfRolls < 0) {
+    } else if (numberOfRolls < 0) {
       for (i <- 0 until (-1 * numberOfRolls)) {
         val first = stack.dropRight(depth)
         val top = stack.takeRight(depth)
@@ -54,7 +53,7 @@ class PietStack {
       }
     }
   }
-  
+
   override def toString(): String = {
     return stack.toString()
   }
