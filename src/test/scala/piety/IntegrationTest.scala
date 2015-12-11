@@ -90,8 +90,8 @@ class IntegrationTest extends AssertionsForJUnit {
   }
 
   def testProg(fileName: String, codelSize: Int, expectedOutput: String) = {
-    var prog: Program = ProgramFactory.createProgramFromImage(ImageIO.read(new File(
-      "src" + File.separator + "test" + File.separator + "resources" + File.separator + fileName)), codelSize)
+    val filePath = getClass.getClassLoader.getResource(fileName).getFile
+    val prog: Program = ProgramFactory.createProgramFromImage(ImageIO.read(new File(filePath)), codelSize)
 
     val stream = new ByteArrayOutputStream()
     Console.withOut(stream) {

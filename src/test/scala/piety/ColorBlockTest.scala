@@ -14,8 +14,8 @@ class ColorBlockTest extends AssertionsForJUnit {
   var prog: Program = _
 
   @Before def initialize() = {
-    prog = ProgramFactory.createProgramFromImage(ImageIO.read(new File(
-      "src" + File.separator + "test" + File.separator + "resources" + File.separator + "test1.gif")), 1)
+    val fileName = getClass.getClassLoader.getResource("test1.gif").getFile
+    prog = ProgramFactory.createProgramFromImage(ImageIO.read(new File(fileName)), 1)
   }
 
   @Test def testExtremes() = {
