@@ -1,9 +1,7 @@
 package piety
 
-import javax.imageio.ImageIO
 import java.io.File
-import java.awt.Color
-import java.io.PrintStream
+import javax.imageio.ImageIO
 
 object Piety {
 

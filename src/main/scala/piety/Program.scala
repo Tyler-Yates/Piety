@@ -1,9 +1,5 @@
 package piety
 
-import java.awt.image.BufferedImage
-import java.awt.Color
-import Hue._
-
 /**
  * Represents a single Piet program.
  */
@@ -36,15 +32,15 @@ class Program(rows: Int, columns: Int, stack: PietStack = new PietStack()) {
       // If both codels are in the same block then we need to combine the two blocks
       if (leftCodel != null && leftCodel.hasSameColorAs(codel)) {
         // Merge the two blocks
-        aboveCodel.getParent().mergeColorBlock(leftCodel.getParent())
+        aboveCodel.getParent.mergeColorBlock(leftCodel.getParent)
       }
-      parent = aboveCodel.getParent()
+      parent = aboveCodel.getParent
     } else if (leftCodel != null && leftCodel.hasSameColorAs(codel)) {
-      parent = leftCodel.getParent()
+      parent = leftCodel.getParent
     }
 
     if (parent == null) {
-      parent = new ColorBlock(codel.getColor())
+      parent = new ColorBlock(codel.getColor)
     }
     parent.addCodel(codel)
 
@@ -53,8 +49,8 @@ class Program(rows: Int, columns: Int, stack: PietStack = new PietStack()) {
     if (r == rows - 1 && c == columns - 1) {
       for (r <- 0 until rows) {
         for (c <- 0 until columns) {
-          var currentCodel: Codel = codels(r)(c)
-          currentCodel.getParent().findEightExtremes(codels)
+          val currentCodel: Codel = codels(r)(c)
+          currentCodel.getParent.findEightExtremes(codels)
         }
       }
     }
@@ -73,16 +69,17 @@ class Program(rows: Int, columns: Int, stack: PietStack = new PietStack()) {
     if (codel == null) {
       throw new IllegalStateException("Program has not been fully initialized! A codel is missing from the board.")
     }
-    return codel
+    codel
   }
 
   def onBoard(r: Int, c: Int): Boolean = {
-    if (r > -1 && c > -1 && r < codels.size && c < codels(0).size) {
+    if (r > -1 && c > -1 && r < codels.length && c < codels(0).length) {
       return true
     }
-    return false
+    false
   }
-  def getStack(): PietStack = {
-    return stack
+
+  def getStack: PietStack = {
+    stack
   }
 }

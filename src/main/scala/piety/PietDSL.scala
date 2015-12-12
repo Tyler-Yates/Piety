@@ -1,6 +1,5 @@
 package piety
 
-import java.lang.IllegalArgumentException
 import java.awt.Color
 
 class PietDSL {
@@ -15,7 +14,7 @@ class PietDSL {
   /**
    * All hail Taylor Swift
    */
-  def BLANK_SPACE {
+  def BLANK_SPACE() {
     var rows = 0
     var cols = 0
     var codels: Array[Array[Codel]] = null
@@ -65,7 +64,7 @@ class PietDSL {
   def addCodel(c: Color): Unit = {
     if (rows <= 0 || cols <= 0)
       throw new IllegalStateException("rows/cols not instantiated")
-    var currentCodel = new Codel(c, currentRow, currentCol)
+    val currentCodel = new Codel(c, currentRow, currentCol)
 
     prog.addCodel(currentCodel)
 
@@ -76,64 +75,83 @@ class PietDSL {
     }
   }
 
-  def ly {
+  def ly() {
     addCodel(Hue.LIGHT_YELLOW)
   }
-  def ny {
+
+  def ny() {
     addCodel(Hue.YELLOW)
   }
-  def dy {
+
+  def dy() {
     addCodel(Hue.DARK_YELLOW)
   }
-  def lr {
+
+  def lr() {
     addCodel(Hue.LIGHT_RED)
   }
-  def nr {
+
+  def nr() {
     addCodel(Hue.RED)
   }
-  def dr {
+
+  def dr() {
     addCodel(Hue.DARK_RED)
   }
-  def lg {
+
+  def lg() {
     addCodel(Hue.LIGHT_GREEN)
   }
-  def ng {
+
+  def ng() {
     addCodel(Hue.GREEN)
   }
-  def dg {
+
+  def dg() {
     addCodel(Hue.DARK_GREEN)
   }
-  def lc {
+
+  def lc() {
     addCodel(Hue.LIGHT_CYAN)
   }
-  def nc {
+
+  def nc() {
     addCodel(Hue.CYAN)
   }
-  def dc {
+
+  def dc() {
     addCodel(Hue.DARK_CYAN)
   }
-  def lb {
+
+  def lb() {
     addCodel(Hue.LIGHT_BLUE)
   }
-  def nb {
+
+  def nb() {
     addCodel(Hue.BLUE)
   }
-  def db {
+
+  def db() {
     addCodel(Hue.DARK_BLUE)
   }
-  def lm {
+
+  def lm() {
     addCodel(Hue.LIGHT_MAGENTA)
   }
-  def nm {
+
+  def nm() {
     addCodel(Hue.MAGENTA)
   }
-  def dm {
+
+  def dm() {
     addCodel(Hue.DARK_MAGENTA)
   }
-  def ww {
+
+  def ww() {
     addCodel(new Color(255, 255, 255))
   }
-  def bb {
+
+  def bb() {
     addCodel(Hue.BLACK)
   }
 }

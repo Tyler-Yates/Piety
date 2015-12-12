@@ -16,53 +16,53 @@ class Codel(val color: Color, val row: Int, val col: Int) {
   // The color block that this codel is part of.
   var parent: ColorBlock = null
 
-  def getRow(): Int = {
-    return r
+  def getRow: Int = {
+    r
   }
 
-  def getColumn(): Int = {
-    return c
+  def getColumn: Int = {
+    c
   }
 
-  def getColor(): PietColor = {
-    return pietColor
+  def getColor: PietColor = {
+    pietColor
   }
 
   /**
    * Returns true if the current codel has the given color.
    */
   def hasColor(color: PietColor): Boolean = {
-    return pietColor.equals(color)
+    pietColor.equals(color)
   }
 
-  override def toString(): String = {
-    return "Row: " + r + " Column: " + c + " Color: " + pietColor.toString()
+  override def toString: String = {
+    "Row: " + r + " Column: " + c + " Color: " + pietColor.toString()
   }
 
   def hasSameColorAs(other: Codel): Boolean = {
-    return pietColor.equals(other.getColor())
+    pietColor.equals(other.getColor)
   }
 
   def equals(other: Codel): Boolean = {
-    return pietColor.equals(other.getColor()) && r == other.r && c == other.c
+    pietColor.equals(other.getColor) && r == other.r && c == other.c
   }
 
   def setParent(par: ColorBlock) = {
     parent = par
   }
 
-  def getParent(): ColorBlock = {
+  def getParent: ColorBlock = {
     if (parent == null) {
       setParent(new ColorBlock(pietColor))
     }
 
-    return parent
+    parent
   }
 
   /**
    * Returns the Codel at the edge of this Codel's ColorBlock
    */
   def getEdgeCodel(dp: Int, cc: Int): Codel = {
-    return parent.getCodel(dp, cc)
+    parent.getCodel(dp, cc)
   }
 }

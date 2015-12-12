@@ -4,7 +4,8 @@ import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io._
 import javax.imageio.ImageIO
-import Hue._
+
+import piety.Hue._
 
 /**
  * Used to turn an image file into ScalaPiet DSL code.
@@ -129,6 +130,6 @@ object Compiler {
   }
 
   def methodHeader(i: Int): String = {
-    return "\tdef " + methodName + i + "(): Unit = {\r\n\t\t"
+    "\tdef " + methodName + i + "(): Unit = {\r\n\t\t"
   }
 }

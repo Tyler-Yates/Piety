@@ -30,8 +30,8 @@ class ColorBlock(pietColor: PietColor) {
   var upLeft: Codel = null
   var upRight: Codel = null
 
-  def getColor(): PietColor = {
-    return color
+  def getColor: PietColor = {
+    color
   }
 
   /**
@@ -43,8 +43,8 @@ class ColorBlock(pietColor: PietColor) {
     children += codel
     codel.setParent(this)
 
-    val r = codel.getRow()
-    val c = codel.getColumn()
+    val r = codel.getRow
+    val c = codel.getColumn
 
     if (r < topEdge) {
       topEdge = r
@@ -66,7 +66,7 @@ class ColorBlock(pietColor: PietColor) {
    */
   def mergeColorBlock(otherBlock: ColorBlock) {
     // Only blocks with the same color can be merged
-    if (!color.equals(otherBlock.getColor())) {
+    if (!color.equals(otherBlock.getColor)) {
       throw new IllegalArgumentException("Color blocks must have same color to merge")
     }
 
@@ -112,69 +112,69 @@ class ColorBlock(pietColor: PietColor) {
 
     // DP = Right
     for (i <- topEdge to bottomEdge) {
-      var currentCodel = codels(i)(rightEdge)
-      if (rightLeft == null && currentCodel.getParent() == this) {
+      val currentCodel = codels(i)(rightEdge)
+      if (rightLeft == null && currentCodel.getParent == this) {
         rightLeft = currentCodel
         // There is no easy way to break out of a loop in Scala :/
       }
     }
 
     for (i <- bottomEdge to topEdge by -1) {
-      var currentCodel = codels(i)(rightEdge)
-      if (rightRight == null && currentCodel.getParent() == this) {
+      val currentCodel = codels(i)(rightEdge)
+      if (rightRight == null && currentCodel.getParent == this) {
         rightRight = currentCodel
       }
     }
 
     // DP = Down
     for (i <- leftEdge to rightEdge) {
-      var currentCodel = codels(bottomEdge)(i)
-      if (downRight == null && currentCodel.getParent() == this) {
+      val currentCodel = codels(bottomEdge)(i)
+      if (downRight == null && currentCodel.getParent == this) {
         downRight = currentCodel
       }
     }
 
     for (i <- rightEdge to leftEdge by -1) {
-      var currentCodel = codels(bottomEdge)(i)
-      if (downLeft == null && currentCodel.getParent() == this) {
+      val currentCodel = codels(bottomEdge)(i)
+      if (downLeft == null && currentCodel.getParent == this) {
         downLeft = currentCodel
       }
     }
 
     // DP = Left
     for (i <- topEdge to bottomEdge) {
-      var currentCodel = codels(i)(leftEdge)
-      if (leftRight == null && currentCodel.getParent() == this) {
+      val currentCodel = codels(i)(leftEdge)
+      if (leftRight == null && currentCodel.getParent == this) {
         leftRight = currentCodel
         // There is no easy way to break out of a loop in Scala :/
       }
     }
 
     for (i <- bottomEdge to topEdge by -1) {
-      var currentCodel = codels(i)(leftEdge)
-      if (leftLeft == null && currentCodel.getParent() == this) {
+      val currentCodel = codels(i)(leftEdge)
+      if (leftLeft == null && currentCodel.getParent == this) {
         leftLeft = currentCodel
       }
     }
 
     // DP = Up
     for (i <- leftEdge to rightEdge) {
-      var currentCodel = codels(topEdge)(i)
-      if (upLeft == null && currentCodel.getParent() == this) {
+      val currentCodel = codels(topEdge)(i)
+      if (upLeft == null && currentCodel.getParent == this) {
         upLeft = currentCodel
       }
     }
 
     for (i <- rightEdge to leftEdge by -1) {
-      var currentCodel = codels(topEdge)(i)
-      if (upRight == null && currentCodel.getParent() == this) {
+      val currentCodel = codels(topEdge)(i)
+      if (upRight == null && currentCodel.getParent == this) {
         upRight = currentCodel
       }
     }
   }
 
   override def equals(other: Any): Boolean = {
-    return this.hashCode() == other.hashCode()
+    this.hashCode() == other.hashCode()
   }
 
   /**
@@ -183,37 +183,37 @@ class ColorBlock(pietColor: PietColor) {
   def getCodel(dp: Int, cc: Int): Codel = {
     if (dp == Direction.Up.id) {
       if (cc == (2 - Direction.Left.id)) {
-        return upLeft
+        upLeft
       } else {
-        return upRight
+        upRight
       }
     } else if (dp == Direction.Right.id) {
       if (cc == (2 - Direction.Left.id)) {
-        return rightLeft
+        rightLeft
       } else {
-        return rightRight
+        rightRight
       }
     } else if (dp == Direction.Down.id) {
       if (cc == (2 - Direction.Left.id)) {
-        return downLeft
+        downLeft
       } else {
-        return downRight
+        downRight
       }
     } else {
       if (cc == (2 - Direction.Left.id)) {
-        return leftLeft
+        leftLeft
       } else {
-        return leftRight
+        leftRight
       }
     }
   }
 
-  def getValue(): Int = {
-    return children.size
+  def getValue: Int = {
+    children.size
   }
 
-  override def toString(): String = {
-    return "Color: " + color.toString() + "\nExtremes:\n" +
+  override def toString: String = {
+    "Color: " + color.toString() + "\nExtremes:\n" +
       rightLeft.toString() + "\n" +
       rightRight.toString() + "\n" +
       downLeft.toString() + "\n" +

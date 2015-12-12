@@ -14,11 +14,11 @@ class PietStack {
   def pop(): Int = {
     val ret = stack.last
     stack = stack.init
-    return ret
+    ret
   }
 
   def size(): Int = {
-    return stack.length
+    stack.length
   }
 
   def clear() = {
@@ -54,7 +54,7 @@ class PietStack {
     }
   }
 
-  override def toString(): String = {
-    return stack.toString()
+  override def toString: String = {
+    stack.toString()
   }
 }

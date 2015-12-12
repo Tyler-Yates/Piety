@@ -1,13 +1,12 @@
 package piety
 
-import org.scalatest.junit.AssertionsForJUnit
-import org.junit.Assert._
-import org.junit.Test
-import org.junit.Before
-
-import javax.imageio.ImageIO
-import java.io.File
 import java.awt.Color
+import java.io.File
+import javax.imageio.ImageIO
+
+import org.junit.Assert._
+import org.junit.{Before, Test}
+import org.scalatest.junit.AssertionsForJUnit
 
 class ColorBlockTest extends AssertionsForJUnit {
 
@@ -25,7 +24,7 @@ class ColorBlockTest extends AssertionsForJUnit {
      * RRR
      */
     val codelUpperLeft = prog.codels(0)(0)
-    val block1 = codelUpperLeft.getParent()
+    val block1 = codelUpperLeft.getParent
     // Test extremes
     assertEquals(codelUpperLeft, block1.leftLeft)
     assertEquals(codelUpperLeft, block1.leftRight)
@@ -40,9 +39,9 @@ class ColorBlockTest extends AssertionsForJUnit {
     val codelLowerRight = prog.codels(2)(2)
     val codelUpperRight = prog.codels(0)(2)
     // Test that the codels are in the same color block
-    assertSame(codelLowerLeft.getParent(), codelLowerRight.getParent())
-    assertSame(codelLowerLeft.getParent(), codelUpperRight.getParent())
-    val block2 = codelLowerLeft.getParent()
+    assertSame(codelLowerLeft.getParent, codelLowerRight.getParent)
+    assertSame(codelLowerLeft.getParent, codelUpperRight.getParent)
+    val block2 = codelLowerLeft.getParent
     assertNotSame(block1, block2)
     // Test extremes
     assertEquals(codelLowerLeft, block2.leftLeft)
@@ -71,10 +70,10 @@ class ColorBlockTest extends AssertionsForJUnit {
     block2.addCodel(codel4)
 
     block1.mergeColorBlock(block2)
-    assertSame(block1, codel1.getParent())
-    assertSame(block1, codel2.getParent())
-    assertSame(block1, codel3.getParent())
-    assertSame(block1, codel4.getParent())
+    assertSame(block1, codel1.getParent)
+    assertSame(block1, codel2.getParent)
+    assertSame(block1, codel3.getParent)
+    assertSame(block1, codel4.getParent)
     assertTrue(block1.children.contains(codel1))
     assertTrue(block1.children.contains(codel2))
     assertTrue(block1.children.contains(codel3))

@@ -1,14 +1,11 @@
 package piety
 
-import org.scalatest.junit.AssertionsForJUnit
+import java.io.{ByteArrayInputStream, ByteArrayOutputStream, File}
+import javax.imageio.ImageIO
+
 import org.junit.Assert._
 import org.junit.Test
-
-import javax.imageio.ImageIO
-import java.io.File
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
-import java.awt.Color
+import org.scalatest.junit.AssertionsForJUnit
 
 class IntegrationTest extends AssertionsForJUnit {
 

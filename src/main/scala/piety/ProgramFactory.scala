@@ -1,7 +1,7 @@
 package piety
 
-import java.awt.image.BufferedImage
 import java.awt.Color
+import java.awt.image.BufferedImage
 
 object ProgramFactory {
 
@@ -18,15 +18,15 @@ object ProgramFactory {
       for (c <- 0 until arrayColumns) {
         val x = c * codelSize
         val y = r * codelSize
-        var color = new Color(img.getRGB(x, y))
-        var pietColor = new PietColor(color)
+        val color = new Color(img.getRGB(x, y))
+        val pietColor = new PietColor(color)
         if (!pietColor.valid)
-          throw new IllegalArgumentException("Image contains invalid colors at (" + x + "," + y + "): " + color.toString())
-        var currentCodel: Codel = new Codel(new Color(img.getRGB(x, y)), r, c)
+          throw new IllegalArgumentException("Image contains invalid colors at (" + x + "," + y + "): " + color.toString)
+        val currentCodel: Codel = new Codel(new Color(img.getRGB(x, y)), r, c)
         prog.addCodel(currentCodel)
       }
     }
 
-    return prog
+    prog
   }
 }
