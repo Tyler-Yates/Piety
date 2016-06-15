@@ -1,8 +1,9 @@
 package piety
 
 import java.awt.Color
-import Hue._
-import Lightness._
+
+import piety.Hue._
+import piety.Lightness._
 
 /**
  * Defines a Piet color for use in the interpreter.
@@ -18,33 +19,33 @@ class PietColor(val color: Color) {
    */
   def calculateHue(color: Color): Hue = {
     color match {
-      case LIGHT_RED     => return Hue.Red
-      case RED           => return Hue.Red
-      case DARK_RED      => return Hue.Red
+      case LIGHT_RED => Hue.Red
+      case RED => Hue.Red
+      case DARK_RED => Hue.Red
 
-      case LIGHT_YELLOW  => return Hue.Yellow
-      case YELLOW        => return Hue.Yellow
-      case DARK_YELLOW   => return Hue.Yellow
+      case LIGHT_YELLOW => Hue.Yellow
+      case YELLOW => Hue.Yellow
+      case DARK_YELLOW => Hue.Yellow
 
-      case LIGHT_GREEN   => return Hue.Green
-      case GREEN         => return Hue.Green
-      case DARK_GREEN    => return Hue.Green
+      case LIGHT_GREEN => Hue.Green
+      case GREEN => Hue.Green
+      case DARK_GREEN => Hue.Green
 
-      case LIGHT_CYAN    => return Hue.Cyan
-      case CYAN          => return Hue.Cyan
-      case DARK_CYAN     => return Hue.Cyan
+      case LIGHT_CYAN => Hue.Cyan
+      case CYAN => Hue.Cyan
+      case DARK_CYAN => Hue.Cyan
 
-      case LIGHT_BLUE    => return Hue.Blue
-      case BLUE          => return Hue.Blue
-      case DARK_BLUE     => return Hue.Blue
+      case LIGHT_BLUE => Hue.Blue
+      case BLUE => Hue.Blue
+      case DARK_BLUE => Hue.Blue
 
-      case LIGHT_MAGENTA => return Hue.Magenta
-      case MAGENTA       => return Hue.Magenta
-      case DARK_MAGENTA  => return Hue.Magenta
+      case LIGHT_MAGENTA => Hue.Magenta
+      case MAGENTA => Hue.Magenta
+      case DARK_MAGENTA => Hue.Magenta
 
-      case BLACK         => return Hue.Black
+      case BLACK => Hue.Black
 
-      case _             => return Hue.White
+      case _ => Hue.White
     }
   }
 
@@ -53,28 +54,28 @@ class PietColor(val color: Color) {
    */
   def calculateLightness(color: Color): Lightness = {
     color match {
-      case LIGHT_RED     => return Lightness.Light
-      case LIGHT_YELLOW  => return Lightness.Light
-      case LIGHT_GREEN   => return Lightness.Light
-      case LIGHT_CYAN    => return Lightness.Light
-      case LIGHT_BLUE    => return Lightness.Light
-      case LIGHT_MAGENTA => return Lightness.Light
+      case LIGHT_RED => Lightness.Light
+      case LIGHT_YELLOW => Lightness.Light
+      case LIGHT_GREEN => Lightness.Light
+      case LIGHT_CYAN => Lightness.Light
+      case LIGHT_BLUE => Lightness.Light
+      case LIGHT_MAGENTA => Lightness.Light
 
-      case RED           => return Lightness.Normal
-      case YELLOW        => return Lightness.Normal
-      case GREEN         => return Lightness.Normal
-      case CYAN          => return Lightness.Normal
-      case BLUE          => return Lightness.Normal
-      case MAGENTA       => return Lightness.Normal
+      case RED => Lightness.Normal
+      case YELLOW => Lightness.Normal
+      case GREEN => Lightness.Normal
+      case CYAN => Lightness.Normal
+      case BLUE => Lightness.Normal
+      case MAGENTA => Lightness.Normal
 
-      case DARK_RED      => return Lightness.Dark
-      case DARK_YELLOW   => return Lightness.Dark
-      case DARK_GREEN    => return Lightness.Dark
-      case DARK_CYAN     => return Lightness.Dark
-      case DARK_BLUE     => return Lightness.Dark
-      case DARK_MAGENTA  => return Lightness.Dark
+      case DARK_RED => Lightness.Dark
+      case DARK_YELLOW => Lightness.Dark
+      case DARK_GREEN => Lightness.Dark
+      case DARK_CYAN => Lightness.Dark
+      case DARK_BLUE => Lightness.Dark
+      case DARK_MAGENTA => Lightness.Dark
 
-      case _             => return Lightness.Normal
+      case _ => Lightness.Normal
     }
   }
 
@@ -84,44 +85,44 @@ class PietColor(val color: Color) {
    */
   def isValid(color: Color): Boolean = {
     color match {
-      case LIGHT_RED     => return true
-      case RED           => return true
-      case DARK_RED      => return true
-      case LIGHT_YELLOW  => return true
-      case YELLOW        => return true
-      case DARK_YELLOW   => return true
-      case LIGHT_GREEN   => return true
-      case GREEN         => return true
-      case DARK_GREEN    => return true
-      case LIGHT_CYAN    => return true
-      case CYAN          => return true
-      case DARK_CYAN     => return true
-      case LIGHT_BLUE    => return true
-      case BLUE          => return true
-      case DARK_BLUE     => return true
-      case LIGHT_MAGENTA => return true
-      case MAGENTA       => return true
-      case DARK_MAGENTA  => return true
-      case BLACK         => return true
-      case WHITE         => return true
+      case LIGHT_RED => true
+      case RED => true
+      case DARK_RED => true
+      case LIGHT_YELLOW => true
+      case YELLOW => true
+      case DARK_YELLOW => true
+      case LIGHT_GREEN => true
+      case GREEN => true
+      case DARK_GREEN => true
+      case LIGHT_CYAN => true
+      case CYAN => true
+      case DARK_CYAN => true
+      case LIGHT_BLUE => true
+      case BLUE => true
+      case DARK_BLUE => true
+      case LIGHT_MAGENTA => true
+      case MAGENTA => true
+      case DARK_MAGENTA => true
+      case BLACK => true
+      case WHITE => true
 
-      case _             => return false
+      case _ => false
     }
   }
 
-  def getHue(): Hue = {
-    return hue
+  def getHue: Hue = {
+    hue
   }
 
-  def getLightness(): Lightness = {
-    return lightness
+  def getLightness: Lightness = {
+    lightness
   }
 
   def equals(other: PietColor): Boolean = {
-    return getHue() == other.getHue() && getLightness() == other.getLightness()
+    getHue == other.getHue && getLightness == other.getLightness
   }
 
-  override def toString(): String = {
-    return getLightness() + " " + getHue()
+  override def toString: String = {
+    getLightness + " " + getHue
   }
 }
