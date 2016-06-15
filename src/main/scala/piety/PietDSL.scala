@@ -148,7 +148,7 @@ class PietDSL {
   }
 
   def ww() {
-    addCodel(new Color(255, 255, 255))
+    addCodel(Hue.WHITE)
   }
 
   def bb() {
