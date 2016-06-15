@@ -15,9 +15,10 @@ class PietDSL {
    * All hail Taylor Swift
    */
   def BLANK_SPACE() {
-    var rows = 0
-    var cols = 0
-    var codels: Array[Array[Codel]] = null
+    rows = 0
+    cols = 0
+    prog = null
+    stack = null
   }
 
   def PALETTE(s: PietStack) {
