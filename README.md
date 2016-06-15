@@ -3,7 +3,7 @@ Piety
 
 CS 345H Final Project to implement the [Piet](http://en.wikipedia.org/wiki/Esoteric_programming_language#Piet) programming language in Scala. A [presentation](https://docs.google.com/presentation/d/1hhwky73h1fhp_I9xM_D9acZCuDa9-0si0MR9dX6ohdk/edit?usp=sharing) about this project is hosted on Google Drive.
 
-We support both an internal and external version of the Piet DSL. The external Piet directly reads from an image to determine program execution. This is how Piet was designed to work, but it is not easily representable within Scala to interact with other code. 
+We support both an internal and external version of the Piet DSL. The external version directly reads from an image to determine program execution. This is how Piet was designed to work, but it is not easily representable within Scala to interact with other code. 
 
 Therefore, we also support an internal, text-based representation of Piet images, along with a handful of basic commands. Our Compiler can then transform an image into a Scala file containing these DSL commands. Then, running this file will call the Interpeter, just as if the text was an actual image.
 
@@ -37,4 +37,4 @@ Open a terminal in the directory where the compiled files were saved
 ####Valid Programs
 * Programs passed to Piety must conform to the Piet [specification](http://www.dangermouse.net/esoteric/piet.html).
 * Piety accepts programs in PNG and GIF formats. Other formats may work but these are the only ones explicitly supported.
-* PNG images should NOT contain alpha as this alters the colors defined in the specification
+* PNG images should NOT contain alpha as this alters the colors defined in the specification.
